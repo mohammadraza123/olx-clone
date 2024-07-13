@@ -57,7 +57,7 @@ export default function Navbar() {
                     <img src={carIcon} width="25px" />
                   </div>
                   <div>
-                    <h3 className="font-bold">Motors</h3>
+                    <h3 className="font-bold">Raza</h3>
                   </div>
                 </div>
 
