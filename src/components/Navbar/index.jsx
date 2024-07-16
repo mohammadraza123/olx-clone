@@ -1,7 +1,5 @@
 import {
   Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
 } from "@headlessui/react";
 import { HiBars3 } from "react-icons/hi2";
 import { FaXmark } from "react-icons/fa6";
@@ -13,6 +11,10 @@ import { IoIosArrowDown } from "react-icons/io";
 import { FaSearch } from "react-icons/fa";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import { getAuth, signOut } from "firebase/auth";
+import { app } from "../../firebase/firebase";
+
+const auth = getAuth(app);
 
 const navigation = [
   { name: "Dashboard", to: "/", current: true },
@@ -23,19 +25,17 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Navbar() {
+export default function Navbar({ user }) {
+  
   return (
-    <Disclosure
-      as="nav"
-      className="sticky top-0 bg-white z-10 border border-b pb-0 md:pb-5"
-    >
+    <Disclosure as="nav" className="sticky top-0 bg-white z-10 border border-b pb-0 md:pb-5">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div className="relative flex-col p-2 h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                {/* Mobile menu button*/}
-                <DisclosureButton className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                {/* Mobile menu button */}
+                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="absolute -inset-0.5" />
                   <span className="sr-only">Open main menu</span>
                   {open ? (
@@ -43,7 +43,7 @@ export default function Navbar() {
                   ) : (
                     <HiBars3 className="block h-6 w-6" aria-hidden="true" />
                   )}
-                </DisclosureButton>
+                </Disclosure.Button>
               </div>
               <div className="flex flex-1 items-center justify-center gap-9 sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
@@ -54,16 +54,16 @@ export default function Navbar() {
 
                 <div className="flex gap-2 justify-center items-center text-center hover:text-blue-400">
                   <div className="w-9 h-9 border border-black rounded-full flex justify-center items-center">
-                    <img src={carIcon} width="25px" />
+                    <img src={carIcon} width="25px" alt="Car Icon" />
                   </div>
                   <div>
-                    <h3 className="font-bold">Raza</h3>
+                    <h3 className="font-bold">Motors</h3>
                   </div>
                 </div>
 
                 <div className="flex gap-2 justify-center items-center text-center hover:text-blue-400">
                   <div className="w-10 h-10 border border-black rounded-full flex justify-center items-center">
-                    <img src={propertyIcon} width="25px" />
+                    <img src={propertyIcon} width="25px" alt="Property Icon" />
                   </div>
                   <div>
                     <h3 className="font-bold">Property</h3>
@@ -93,16 +93,27 @@ export default function Navbar() {
                   <FaSearch className="h-6 w-6 text-white pointer-events-none" />
                 </div>
               </div>
-              <div>
-                <Link
-                  to="/login"
-                  className="underline font-bold cursor-pointer"
-                >
-                  Login
-                </Link>
-              </div>
-
-              <div className="relative">
+              <div className="flex">
+                { user ? (
+                  <Link
+                  to="/"
+                    className="underline font-bold cursor-pointer"
+                    onClick={() => signOut(auth)}
+                  >
+                    Logout
+                  </Link>) : (
+                  <Link to="/login" className="underline font-bold cursor-pointer">
+                    Login
+                  </Link>
+                 ) }
+ </div>
+ 
+ { user && (
+                <div className="border text-center border-black rounded-full bg-black flex font-bold text-sm text-white">
+                  {user.displayName}
+                </div>
+ ) }
+  <div className="relative">
                 <img src={buttonIcon} alt="Button Icon" className="block" />
                 <h2 className="absolute inset-x-0 top-1/2 transform -translate-y-1/2 text-center font-bold cursor-pointer">
                   + Sell
@@ -110,7 +121,7 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-          <DisclosurePanel className="sm:hidden">
+          <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pb-3 pt-2">
               {navigation.map((item) => (
                 <Link
@@ -128,7 +139,7 @@ export default function Navbar() {
                 </Link>
               ))}
             </div>
-          </DisclosurePanel>
+          </Disclosure.Panel>
         </>
       )}
     </Disclosure>

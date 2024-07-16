@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../Navbar";
 import Categories from "../Categories";
 import AdvertiseBanner from "../AdvertiseBanner";
 import AllCategories from "../AllCategories";
@@ -10,7 +9,6 @@ import ScrollToTop from "react-scroll-to-top";
 export default function Home() {
   return (
     <>
-      <Navbar />
       <Categories />
       <AdvertiseBanner />
       <AllCategories />

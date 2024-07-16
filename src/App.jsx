@@ -1,22 +1,56 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./components/Home";
 import ProductDetail from "./components/ProductDetail";
 import Login from "./components/Authentication/Login";
-import Signup from "./components/Authentication/signup";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { app } from "./firebase/firebase";
+import { useEffect, useState } from "react";
+import Navbar from "./components/Navbar";
+import Signup from "./components/Authentication/Signup";
+
+const auth = getAuth(app);
+
 
 function App() {
-  return (
-    <>
-      
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+     onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log('You are logged in', user);
+        setUser(user);
+      } else {
+        console.log('You are logged out',user);
+        setUser(null);
+      }
+    });
+
+  }, []);
+
+  if (user === null) {
+    return (
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home  />} />
         <Route path="/login" element={<Login />} />
-        <Route path ="/signup" element={<Signup/>}/>
-        <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-    </>
-  );
+    );
+  }
+else{
+  return(
+    <>
+    <Navbar user={user}/>
+<Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="*" element={<Navigate to ="/"/>} />
+      </Routes>
+      </>
+  )
 }
+}   
+
 
 export default App;
