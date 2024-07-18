@@ -16,19 +16,7 @@ const Signup = () => {
     signInWithPopup(auth,googleProvider)
   }
   
-  const joinwithEmail =()=>{
-  
-    sendSignInLinkToEmail(auth, email, actionCodeSettings)
-    .then(() => {
-      window.localStorage.setItem('emailForSignIn', email);
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-    });
-  
-  }
-  
+
 
   return (
     <>
@@ -63,12 +51,14 @@ const Signup = () => {
               </span>
               <hr className="flex-grow border-zinc-200 dark:border-zinc-700" />
             </div>
-            <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium border-2 hover:border-4 border-black text-[#002F34] text-lg h-10 px-4 py-5 w-full">
+            <Link
+            to="/SignupEmail" 
+            className="inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium border-2 hover:border-4 border-black text-[#002F34] text-lg h-10 px-4 py-5 w-full">
               <div className="flex items-center justify-center">
                 <MdEmail className="mx-2 text-2xl" />
                 Login with Email
               </div>
-            </button>
+            </Link>
             
             <div className=" py-2">
               <p className="text-sm text-center pb-6">

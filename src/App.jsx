@@ -7,6 +7,8 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { app } from "./firebase/firebase";
 import { useEffect, useState } from "react";
 import Signup from "./components/Authentication/Signup";
+import SignupEmail from "./components/Authentication/SignupEmail";
+import SigninEmail from "./components/Authentication/SigninEmail";
 
 const auth = getAuth(app);
 
@@ -33,7 +35,12 @@ function App() {
         <Route path="/" element={<Home  />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/SignupEmail" element={<SignupEmail />} />
+        <Route path="/SigninEmail" element={<SigninEmail />} />
+
+        
         <Route path="*" element={<Navigate to="/" />} />
+
       </Routes>
     );
   }
