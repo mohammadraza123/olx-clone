@@ -6,7 +6,6 @@ import Login from "./components/Authentication/Login";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { app } from "./firebase/firebase";
 import { useEffect, useState } from "react";
-import Navbar from "./components/Navbar";
 import Signup from "./components/Authentication/Signup";
 
 const auth = getAuth(app);
@@ -39,16 +38,15 @@ function App() {
     );
   }
 else{
-  return(
+  return (
     <>
-    <Navbar user={user}/>
-<Routes>
-        <Route path="/" element={<Home />} />
+      <Routes>
+        <Route path="/" element={<Home user={user} />} />
         <Route path="/product/:id" element={<ProductDetail />} />
-        <Route path="*" element={<Navigate to ="/"/>} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-      </>
-  )
+    </>
+  );
 }
 }   
 

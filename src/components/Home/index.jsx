@@ -5,10 +5,12 @@ import AllCategories from "../AllCategories";
 import ItemsCard from "../ItemsCard";
 import Footer from "../Footer";
 import ScrollToTop from "react-scroll-to-top";
+import Navbar from "../Navbar";
 
-export default function Home() {
+export default function Home({user}) {
   return (
     <>
+    <Navbar user={user}/>
       <Categories />
       <AdvertiseBanner />
       <AllCategories />
