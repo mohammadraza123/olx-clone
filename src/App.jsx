@@ -2,13 +2,13 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./components/Home";
 import ProductDetail from "./components/ProductDetail";
-import Login from "./components/Authentication/Login";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { app } from "./firebase/firebase";
 import { useEffect, useState } from "react";
 import SignupEmail from "./components/Authentication/SignupEmail";
 import SigninEmail from "./components/Authentication/SigninEmail";
-import Signup from "./components/Authentication/Signup";
+import Login from "./components/Authentication/Login";
+import SignupForm from "./components/Authentication/SignupForm";
 
 const auth = getAuth(app);
 
@@ -32,7 +32,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/signup" element={<SignupForm />} />
         <Route path="/SignupEmail" element={<SignupEmail />} />
         <Route path="/SigninEmail" element={<SigninEmail />} />
 

@@ -9,7 +9,7 @@ import { MdEmail } from "react-icons/md";
 const googleProvider = new GoogleAuthProvider();
 const auth = getAuth(app);
 
-const Signup = () => {
+const SignupForm = () => {
 
 
   
@@ -84,4 +84,4 @@ const Signup = () => {
   );
 }
 
-export default Signup
+export default SignupForm;
