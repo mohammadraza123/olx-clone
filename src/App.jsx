@@ -6,9 +6,9 @@ import Login from "./components/Authentication/Login";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { app } from "./firebase/firebase";
 import { useEffect, useState } from "react";
-import Signup from "./components/Authentication/Signup";
 import SignupEmail from "./components/Authentication/SignupEmail";
 import SigninEmail from "./components/Authentication/SigninEmail";
+import Signup from "./components/Authentication/Signup";
 
 const auth = getAuth(app);
 
