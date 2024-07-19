@@ -12,50 +12,44 @@ import Signup from "./components/Authentication/Signup";
 
 const auth = getAuth(app);
 
-
 function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-     onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log('You are logged in', user);
+        console.log("You are logged in", user);
         setUser(user);
       } else {
-        console.log('You are logged out',user);
+        console.log("You are logged out", user);
         setUser(null);
       }
     });
-
   }, []);
 
   if (user === null) {
     return (
       <Routes>
-        <Route path="/" element={<Home  />} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/SignupEmail" element={<SignupEmail />} />
         <Route path="/SigninEmail" element={<SigninEmail />} />
 
-        
         <Route path="*" element={<Navigate to="/" />} />
-
       </Routes>
     );
+  } else {
+    return (
+      <>
+        <Routes>
+          <Route path="/" element={<Home user={user} />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </>
+    )
   }
-else{
-  return (
-    <>
-      <Routes>
-        <Route path="/" element={<Home user={user} />} />
-        <Route path="/product/:id" element={<ProductDetail />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </>
-  );
 }
-}   
-
 
 export default App;
