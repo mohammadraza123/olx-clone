@@ -6,7 +6,7 @@ import axios from "axios";
 import { FaRegHeart } from "react-icons/fa";
 import Footer from "../Footer";
 import Slider from "../Slider";
-const ProductDetail = () => {
+const ProductDetail = ({user}) => {
   const { id } = useParams();
   const [data, setData] = useState(null);
 
@@ -40,7 +40,7 @@ const ProductDetail = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar user={user}/>
       <Categories />
 
       <Slider images={data.images} />

@@ -9,6 +9,7 @@ import SignupEmail from "./components/Authentication/SignupEmail";
 import SigninEmail from "./components/Authentication/SigninEmail";
 import Login from "./components/Authentication/Login";
 import SignupForm from "./components/Authentication/SignupForm";
+import Myfavourites from "./components/MyFavourites";
 
 const auth = getAuth(app);
 
@@ -35,8 +36,8 @@ function App() {
         <Route path="/signup" element={<SignupForm />} />
         <Route path="/SignupEmail" element={<SignupEmail />} />
         <Route path="/SigninEmail" element={<SigninEmail />} />
-
         <Route path="*" element={<Navigate to="/" />} />
+
       </Routes>
     );
   } else {
@@ -44,7 +45,8 @@ function App() {
       <>
         <Routes>
           <Route path="/" element={<Home user={user} />} />
-          <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/product/:id" element={<ProductDetail user={user} />} />
+          <Route path="/myFavourites" element={<Myfavourites />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </>

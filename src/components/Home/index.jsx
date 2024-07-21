@@ -6,6 +6,7 @@ import ItemsCard from "../ItemsCard";
 import Footer from "../Footer";
 import ScrollToTop from "react-scroll-to-top";
 import Navbar from "../Navbar";
+import { Link } from "react-router-dom";
 
 export default function Home({user}) {
   return (
@@ -35,7 +36,13 @@ export default function Home({user}) {
         justifyContent: "center",
         marginRight: "-26px",
       }}
+
+
+
     />
+
+<Link to="/myFavourites">MY FAVOURITES</Link>
+
     </>
   );
 }
