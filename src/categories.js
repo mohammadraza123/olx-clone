@@ -1,3 +1,11 @@
+import { GrCopy } from "react-icons/gr";
+import { FaRegHeart } from "react-icons/fa";
+import { FiEye } from "react-icons/fi";
+import { MdHelpOutline } from "react-icons/md";
+import { LuSettings } from "react-icons/lu";
+import { RiBillLine } from "react-icons/ri";
+import { CgCreditCard } from "react-icons/cg";
+
 export const categories = [
   {
     id: 1,
@@ -177,4 +185,14 @@ export const allCategoriesWithImages = [
     icon: "/assets/categories/category-14.png",
     title: "Kids",
   },
+];
+
+export const menuItems = [
+  { icon: GrCopy, text: "My Ads" },
+  { icon: FaRegHeart, text: "Favourites & Saved searches" },
+  { icon: FiEye, text: "Public Profile" },
+  { icon: RiBillLine, text: "Buy Discounted Packages" },
+  { icon: CgCreditCard, text: "Bought Packages and Billing" },
+  { icon: MdHelpOutline, text: "Help" },
+  { icon: LuSettings, text: "Settings" },
 ];
