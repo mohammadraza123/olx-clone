@@ -5,13 +5,11 @@ import AllCategories from "../AllCategories";
 import ItemsCard from "../ItemsCard";
 import Footer from "../Footer";
 import ScrollToTop from "react-scroll-to-top";
-import Navbar from "../Navbar";
 import { Link } from "react-router-dom";
 
 export default function Home({user}) {
   return (
     <>
-    <Navbar user={user}/>
       <Categories />
       <AdvertiseBanner />
       <AllCategories />

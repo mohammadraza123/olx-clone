@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../Navbar";
 import Categories from "../Categories";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { FaRegHeart } from "react-icons/fa";
 import Footer from "../Footer";
 import Slider from "../Slider";
-const ProductDetail = ({user}) => {
+const ProductDetail = ({ user }) => {
   const { id } = useParams();
   const [data, setData] = useState(null);
 
@@ -40,11 +39,8 @@ const ProductDetail = ({user}) => {
 
   return (
     <>
-      <Navbar user={user}/>
       <Categories />
-
       <Slider images={data.images} />
-
       <div className="pt-3 mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 flex flex-col gap-4">
         <div className="border w-full lg:w-2/3 p-4 rounded-md ">
           <div className="flex flex-row items-center justify-between">

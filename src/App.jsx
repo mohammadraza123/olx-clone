@@ -10,6 +10,7 @@ import SigninEmail from "./components/Authentication/SigninEmail";
 import Login from "./components/Authentication/Login";
 import SignupForm from "./components/Authentication/SignupForm";
 import Myfavourites from "./components/MyFavourites";
+import Navbar from "./components/Navbar";
 
 const auth = getAuth(app);
 
@@ -30,19 +31,22 @@ function App() {
 
   if (user === null) {
     return (
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignupForm />} />
-        <Route path="/SignupEmail" element={<SignupEmail />} />
-        <Route path="/SigninEmail" element={<SigninEmail />} />
-        <Route path="*" element={<Navigate to="/" />} />
-
-      </Routes>
+      <>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignupForm />} />
+          <Route path="/SignupEmail" element={<SignupEmail />} />
+          <Route path="/SigninEmail" element={<SigninEmail />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </>
     );
   } else {
     return (
       <>
+        <Navbar user={user} />
         <Routes>
           <Route path="/" element={<Home user={user} />} />
           <Route path="/product/:id" element={<ProductDetail user={user} />} />
@@ -50,7 +54,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </>
-    )
+    );
   }
 }
 
