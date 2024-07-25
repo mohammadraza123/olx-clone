@@ -135,10 +135,12 @@ export default function Navbar({ user }) {
                         </MenuItem>
                         {menuItems.map((item, index) => (
                           <MenuItem key={index}>
+                            <Link to={item.href}>
                             <div className="flex items-center gap-5 py-3 px-4 hover:bg-[#d3fcfc] cursor-pointer">
                               {<item.icon className=" text-2xl" />}
                               <p>{item.text}</p>
                             </div>
+                            </Link>
                           </MenuItem>
                         ))}
                         <MenuItem>

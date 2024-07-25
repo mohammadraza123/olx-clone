@@ -6,10 +6,12 @@ import ItemsCard from "../ItemsCard";
 import Footer from "../Footer";
 import ScrollToTop from "react-scroll-to-top";
 import { Link } from "react-router-dom";
+import Navbar from "../Navbar";
 
 export default function Home({user}) {
   return (
     <>
+  { user ==null && <Navbar />}
       <Categories />
       <AdvertiseBanner />
       <AllCategories />

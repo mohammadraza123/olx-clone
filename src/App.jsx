@@ -29,33 +29,36 @@ function App() {
     });
   }, []);
 
-  if (user === null) {
-    return (
-      <>
-        <Navbar />
+  const renderRoutes = () => {
+    if (user === null) {
+      return (
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignupForm />} />
           <Route path="/SignupEmail" element={<SignupEmail />} />
           <Route path="/SigninEmail" element={<SigninEmail />} />
-          <Route path="*" element={<Navigate to="/" />} />
+          <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <Navbar user={user} />
+      );
+    } else {
+      return (
         <Routes>
           <Route path="/" element={<Home user={user} />} />
           <Route path="/product/:id" element={<ProductDetail user={user} />} />
           <Route path="/myFavourites" element={<Myfavourites />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
-      </>
-    );
-  }
+      );
+    }
+  };
+
+  return (
+    <>
+      {user !== null && <Navbar user={user} />}
+      {renderRoutes()}
+    </>
+  );
 }
 
 export default App;

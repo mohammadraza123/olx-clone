@@ -5,6 +5,7 @@ import { MdHelpOutline } from "react-icons/md";
 import { LuSettings } from "react-icons/lu";
 import { RiBillLine } from "react-icons/ri";
 import { CgCreditCard } from "react-icons/cg";
+import { Link } from "react-router-dom";
 
 export const categories = [
   {
@@ -187,12 +188,14 @@ export const allCategoriesWithImages = [
   },
 ];
 
+
+
 export const menuItems = [
-  { icon: GrCopy, text: "My Ads" },
-  { icon: FaRegHeart, text: "Favourites & Saved searches" },
-  { icon: FiEye, text: "Public Profile" },
-  { icon: RiBillLine, text: "Buy Discounted Packages" },
-  { icon: CgCreditCard, text: "Bought Packages and Billing" },
-  { icon: MdHelpOutline, text: "Help" },
-  { icon: LuSettings, text: "Settings" },
+  { id:"myAds", icon: GrCopy, text: "My Ads", href: "/myAds" },
+  {id:"myFavourites", icon: FaRegHeart, text: "Favourites & Saved searches", href: "/myFavourites" },
+  {id:"publicProfile", icon: FiEye, text: "Public Profile" ,  href: "/public-profile" },
+  {id:"pkgs", icon: RiBillLine, text: "Buy Discounted Packages",  href: "/buy-discounted-packages" },
+  {id:"bills", icon: CgCreditCard, text: "Bought Packages and Billing",  href: "/bought-billing-pacakages" },
+  {id:"help", icon: MdHelpOutline, text: "Help" , href: "/help" },
+  {id:"settings", icon: LuSettings, text: "Settings", href: "/settings" },
 ];
