@@ -1,16 +1,17 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Home from "./components/Home";
-import ProductDetail from "./components/ProductDetail";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { app } from "./firebase/firebase";
 import { useEffect, useState } from "react";
-import SignupEmail from "./components/Authentication/SignupEmail";
-import SigninEmail from "./components/Authentication/SigninEmail";
-import Login from "./components/Authentication/Login";
-import SignupForm from "./components/Authentication/SignupForm";
-import Myfavourites from "./components/MyFavourites";
 import Navbar from "./components/Navbar";
+import Myfavourites from "./pages/MyFavourites";
+import SignupForm from "./pages/Authentication/SignupForm"
+import SigninEmail from "./pages/Authentication/SigninEmail"
+import SignupEmail from "./pages/Authentication/SignupEmail"
+import ProductDetail from "./pages/ProductDetail";
+import Home from "./pages/Home";
+import Login from "./pages/Authentication/Login"
+
 
 const auth = getAuth(app);
 
@@ -47,9 +48,12 @@ function App() {
           <Route path="/myFavourites" element={<Myfavourites />} />
           <Route path="/" element={<Home user={user} />} />
           <Route path="/product/:id" element={<ProductDetail user={user} />} />
-          {/* <Route path="/SigninEmail" element={<SigninEmail />} /> */}
-
-
+          <Route
+            path="/myFavourites"
+            element={
+              <Myfavourites title="Mobile Phones" apiCategory="smartphones" />
+            }
+          />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       );
