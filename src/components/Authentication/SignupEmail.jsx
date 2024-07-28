@@ -1,82 +1,103 @@
-import React, { useState } from 'react'
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import { app } from '../../firebase/firebase';
-
-
-const auth = getAuth(app);
-
+import React, { useState } from "react";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { app } from "../../firebase/firebase";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 
 const SignupEmail = () => {
+  const [fname, setfName] = useState("");
+  const [lname, setlName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleEmail = (e) => {
-    const emailField = e.target.value;
-    setEmail(emailField);
-  };
+  const auth = getAuth(app);
+  const firestore = getFirestore(app);
 
-  const handlePassword = (e) => {
-    const passField = e.target.value;
-    setPassword(passField);
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault(); 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((res) => { console.log('signin with email :', res) })
-      .catch((err) => console.log(err));
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Add Authentication
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const userId = userCredential.user.uid;
+
+      // Add data in the firestore database with Authentication UID
+      await setDoc(doc(firestore, "users", userId), {
+        firstName: fname,
+        lastName: lname,
+        email: email,
+        password: password,
+      });
+    } catch (error) {
+      console.error("Error signing up:", error);
+    }
   };
   return (
-    <>
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <div className="bg-white p-8 rounded-lg shadow-md w-96">
-          <h1 className="text-2xl font-semibold mb-6 text-center">Sign In</h1>
-          <form>
-            <div className="mb-4">
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Email Address
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={email}
-                onChange={handleEmail}
-                required
-                className="mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm"
-              />
-            </div>
-            <div className="mb-6">
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={password}
-                onChange={handlePassword}
-                required
-                className="mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm"
-              />
-            </div>
-            <button 
-            onClick={handleSubmit}
-              className="w-full px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Sign In
-            </button>
-          </form>
-        </div>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="bg-white p-8 rounded-lg shadow-md w-96">
+        <h1 className="text-2xl font-semibold mb-6 text-center">Sign Up</h1>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="block text-sm">First Name</label>
+            <input
+              name="firstName"
+              value={fname}
+              onChange={(e) => setfName(e.target.value)}
+              required
+              className="mt-1 px-3 py-2 border rounded-md focus:outline-none focus:border-indigo-500 w-full sm:text-sm"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">
+              Last Name
+            </label>
+            <input
+              name="lastName"
+              value={lname}
+              onChange={(e) => setlName(e.target.value)}
+              required
+              className="mt-1 px-3 py-2 border rounded-md focus:outline-none focus:border-indigo-500 w-full sm:text-sm"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">
+              Email Address
+            </label>
+            <input
+              type="email"
+              value={email}
+              name="email"
+              required
+              onChange={(e) => setEmail(e.target.value)}
+              className="mt-1 px-3 py-2 border rounded-md focus:outline-none focus:border-indigo-500 w-full sm:text-sm"
+            />
+          </div>
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700">
+              Password
+            </label>
+            <input
+              type="password"
+              value={password}
+              name="password"
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="mt-1 px-3 py-2 border rounded-md focus:outline-none focus:border-indigo-500 w-full sm:text-sm"
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Sign In
+          </button>
+        </form>
       </div>
-
-    </>
+    </div>
   );
-}
+};
 
-export default SignupEmail
+export default SignupEmail;

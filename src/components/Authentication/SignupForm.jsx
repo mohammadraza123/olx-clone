@@ -54,7 +54,7 @@ const SignupForm = () => {
             >
               <div className="flex items-center justify-center">
                 <MdEmail className="mx-2 text-2xl" />
-                Login with Email
+                Sign up with Email
               </div>
             </Link>
 

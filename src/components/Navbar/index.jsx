@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import icon from "/assets/icons/olx-web-icon.png";
 import carIcon from "/assets/icons/car-icon.png";
 import buttonIcon from "/assets/icons/button-icon.svg";
@@ -5,8 +6,7 @@ import profileIcon from "/assets/icons/profile-icon.png";
 import propertyIcon from "/assets/icons/property-icon.png";
 import { Disclosure } from "@headlessui/react";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
-import { HiBars3 } from "react-icons/hi2";
-import { FaXmark } from "react-icons/fa6";
+import { HiBars3, HiOutlineXMark  } from "react-icons/hi2";
 import { IoIosArrowDown } from "react-icons/io";
 import { FaSearch } from "react-icons/fa";
 import { HiOutlineLocationMarker } from "react-icons/hi";
@@ -14,10 +14,9 @@ import { IoChevronDown } from "react-icons/io5";
 import { MdLogout } from "react-icons/md";
 import { menuItems } from "../../categories";
 import { Link } from "react-router-dom";
-import { getAuth, signOut } from "firebase/auth";
 import { app } from "../../firebase/firebase";
-
-const auth = getAuth(app);
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { getFirestore, getDoc, doc } from "firebase/firestore";
 
 const navigation = [
   { name: "Dashboard", to: "/", current: true },
@@ -29,6 +28,35 @@ function classNames(...classes) {
 }
 
 export default function Navbar({ user }) {
+  const [username, setUsername] = useState("");
+  const auth = getAuth(app);
+  const firestore = getFirestore(app);
+
+  useEffect(() => {
+    const fetchUsername = async (user) => {
+      if (user.displayName) {
+        setUsername(user.displayName);
+      } else {
+        // Get username from firestore database
+        const userDoc = await getDoc(doc(firestore, "users", user.uid));
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          setUsername(`${userData.firstName} ${userData.lastName}`);
+        }
+      }
+    };
+
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        fetchUsername(user);
+      } else {
+        setUsername(""); // Clear username if not authenticated
+      }
+    });
+
+    return () => unsubscribe();
+  }, [auth, firestore]);
+
   return (
     <Disclosure
       as="nav"
@@ -43,7 +71,7 @@ export default function Navbar({ user }) {
                 <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white ">
                   <span className="absolute -inset-0.5" />
                   {open ? (
-                    <FaXmark className=" h-6 w-6" />
+                    <HiOutlineXMark  className=" h-6 w-6" />
                   ) : (
                     <HiBars3 className=" h-6 w-6" />
                   )}
@@ -121,7 +149,7 @@ export default function Navbar({ user }) {
                             <div>
                               <p>Hello,</p>
                               <span className="w-full font-bold">
-                                {user.displayName}
+                                {username}
                               </span>
                             </div>
                           </div>
@@ -136,10 +164,10 @@ export default function Navbar({ user }) {
                         {menuItems.map((item, index) => (
                           <MenuItem key={index}>
                             <Link to={item.href}>
-                            <div className="flex items-center gap-5 py-3 px-4 hover:bg-[#d3fcfc] cursor-pointer">
-                              {<item.icon className=" text-2xl" />}
-                              <p>{item.text}</p>
-                            </div>
+                              <div className="flex items-center gap-5 py-3 px-4 hover:bg-[#d3fcfc] cursor-pointer">
+                                {<item.icon className=" text-2xl" />}
+                                <p>{item.text}</p>
+                              </div>
                             </Link>
                           </MenuItem>
                         ))}

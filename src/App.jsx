@@ -44,9 +44,12 @@ function App() {
     } else {
       return (
         <Routes>
+          <Route path="/myFavourites" element={<Myfavourites />} />
           <Route path="/" element={<Home user={user} />} />
           <Route path="/product/:id" element={<ProductDetail user={user} />} />
-          <Route path="/myFavourites" element={<Myfavourites />} />
+          {/* <Route path="/SigninEmail" element={<SigninEmail />} /> */}
+
+
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       );
