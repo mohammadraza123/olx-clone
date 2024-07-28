@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Categories from "../Categories";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { FaRegHeart } from "react-icons/fa";
-import Footer from "../Footer";
-import Slider from "../Slider";
+import Slider from "../../components/Slider";
+import Categories from "../../components/Categories";
+import Footer from "../../components/Footer"
+
+
 const ProductDetail = ({ user }) => {
   const { id } = useParams();
   const [data, setData] = useState(null);

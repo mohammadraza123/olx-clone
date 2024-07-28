@@ -1,19 +1,18 @@
 import React from "react";
-import Categories from "../Categories";
-import AdvertiseBanner from "../AdvertiseBanner";
-import AllCategories from "../AllCategories";
-import ItemsCard from "../ItemsCard";
-import Footer from "../Footer";
+import AllCategories from "../../components/AllCategories";
+import ItemsCard from "../../components/ItemsCard";
 import ScrollToTop from "react-scroll-to-top";
 import { Link } from "react-router-dom";
-import Navbar from "../Navbar";
-
+import Categories from "../../components/Categories";
+import AdvisorBanner from "../../components/AdvertiseBanner"
+import Footer from "../../components/Footer";
+import Navbar from "../../components/Navbar";
 export default function Home({user}) {
   return (
     <>
   { user ==null && <Navbar />}
       <Categories />
-      <AdvertiseBanner />
+<AdvisorBanner />
       <AllCategories />
       <ItemsCard title="Mobile Phones" apiCategory="smartphones" />
       <ItemsCard title="Cars" apiCategory={"vehicle"} />
