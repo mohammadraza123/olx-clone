@@ -1,27 +1,23 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
 import { IoClose } from "react-icons/io5";
-import { GoogleAuthProvider, signInWithPopup  } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { getAuth } from "firebase/auth";
-import { app } from '../../firebase/firebase';
+import { app } from "../../firebase/firebase";
 import { FcGoogle } from "react-icons/fc";
 import { MdEmail } from "react-icons/md";
 const googleProvider = new GoogleAuthProvider();
 const auth = getAuth(app);
 
 const SignupForm = () => {
-
-
-  
-    const joinWithGoogle =()=>{
-        signInWithPopup(auth,googleProvider)
-      }
-    
+  const joinWithGoogle = () => {
+    signInWithPopup(auth, googleProvider);
+  };
 
   return (
     <>
       <div className="flex justify-center items-center min-h-screen">
-        <div className="max-w-sm w-full rounded-lg shadow-lg bg-white p-6  border border-gray-200">
+        <div className="max-w-sm w-full rounded-lg shadow-lg bg-white p-6 border ">
           <div className="flex justify-end pb-2">
             <Link className="text-3xl" to="/">
               <IoClose />
@@ -34,10 +30,10 @@ const SignupForm = () => {
             </p>
           </div>
           <div className="space-y-4">
-            <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium border-2 hover:border-4 border-black text-[#002F34] text-lg h-10 px-4 py-5 w-full">
+            <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium border hover:border-2 border-black text-[#002F34] text-lg h-10 px-4 py-5 w-full">
               <div className="flex justify-center items-center ">
                 <FcGoogle className="mx-2 text-2xl" />
-                <button onClick={joinWithGoogle}>join with Google</button>
+                <button onClick={joinWithGoogle}>Join with Google</button>
               </div>
             </button>
 
@@ -50,11 +46,11 @@ const SignupForm = () => {
             </div>
             <Link
               to="/SignupEmail"
-              className="inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium border-2 hover:border-4 border-black text-[#002F34] text-lg h-10 px-4 py-5 w-full"
+              className="inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium border hover:border-2 border-black text-[#002F34] text-lg h-10 px-4 py-5 w-full"
             >
               <div className="flex items-center justify-center">
                 <MdEmail className="mx-2 text-2xl" />
-                Sign up with Email
+                Join with Email
               </div>
             </Link>
 
@@ -82,6 +78,6 @@ const SignupForm = () => {
       </div>
     </>
   );
-}
+};
 
 export default SignupForm;

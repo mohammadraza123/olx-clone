@@ -1,29 +1,22 @@
-import React, { useState } from 'react'
-import { app } from '../../firebase/firebase';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-
+import React, { useState } from "react";
+import { app } from "../../firebase/firebase";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { ToastContainer, toast } from "react-toastify";
 
 const auth = getAuth(app);
-
 
 const SigninEmail = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleEmail = (e) => {
-    const emailField = e.target.value;
-    setEmail(emailField);
-  };
-
-  const handlePassword = (e) => {
-    const passField = e.target.value;
-    setPassword(passField);
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault(); 
-    signInWithEmailAndPassword(auth, email, password)
-console.log('logged in')
-    .catch((err) => console.log(err));
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      toast.success("Successfully Login");
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
   return (
     <>
@@ -32,41 +25,31 @@ console.log('logged in')
           <h1 className="text-2xl font-semibold mb-6 text-center">Sign In</h1>
           <form>
             <div className="mb-4">
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
-              >
+              <label className="block text-sm font-medium text-gray-700">
                 Email Address
               </label>
               <input
                 type="email"
-                id="email"
-                name="email"
                 value={email}
-                onChange={handleEmail}
+                onChange={(e) => setEmail(e.target.value)}
                 required
-                className="mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm"
+                className="mt-1 px-3 py-2 border rounded-md focus:outline-none focus:border-indigo-500 w-full sm:text-sm"
               />
             </div>
             <div className="mb-6">
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
-              >
+              <label className="block text-sm font-medium text-gray-700">
                 Password
               </label>
               <input
                 type="password"
-                id="password"
-                name="password"
                 value={password}
-                onChange={handlePassword}
+                onChange={(e) => setPassword(e.target.value)}
                 required
-                className="mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm"
+                className="mt-1 px-3 py-2 border rounded-md focus:outline-none focus:border-indigo-500 w-full sm:text-sm"
               />
             </div>
-            <button 
-            onClick={handleSubmit}
+            <button
+              onClick={handleSubmit}
               className="w-full px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Sign In
@@ -74,9 +57,9 @@ console.log('logged in')
           </form>
         </div>
       </div>
-
+      <ToastContainer />
     </>
   );
-}
+};
 
-export default SigninEmail
+export default SigninEmail;

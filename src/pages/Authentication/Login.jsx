@@ -31,10 +31,10 @@ const Login = () => {
             </p>
           </div>
           <div className="space-y-4">
-            <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium border-2 hover:border-4 border-black text-[#002F34] text-lg h-10 px-4 py-5 w-full">
+            <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium border hover:border-2 border-black text-[#002F34] text-lg h-10 px-4 py-5 w-full">
               <div className="flex justify-center items-center ">
                 <FcGoogle className="mx-2 text-2xl" />
-                <button onClick={joinWithGoogle}>join with Google</button>
+                <button onClick={joinWithGoogle}>Login with Google</button>
               </div>
             </button>
 
@@ -47,7 +47,7 @@ const Login = () => {
             </div>
             <Link
               to="/SigninEmail"
-              className="inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium border-2 hover:border-4 border-black text-[#002F34] text-lg h-10 px-4 py-5 w-full"
+              className="inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium border hover:border-2 border-black text-[#002F34] text-lg h-10 px-4 py-5 w-full"
             >
               <div className="flex items-center justify-center">
                 <MdEmail className="mx-2 text-2xl" />
