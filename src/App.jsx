@@ -5,13 +5,14 @@ import { app } from "./firebase/firebase";
 import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import Myfavourites from "./pages/MyFavourites";
-import SignupForm from "./pages/Authentication/SignupForm"
-import SigninEmail from "./pages/Authentication/SigninEmail"
-import SignupEmail from "./pages/Authentication/SignupEmail"
+import SignupForm from "./pages/Authentication/SignupForm";
+import SigninEmail from "./pages/Authentication/SigninEmail";
+import SignupEmail from "./pages/Authentication/SignupEmail";
 import ProductDetail from "./pages/ProductDetail";
 import Home from "./pages/Home";
-import Login from "./pages/Authentication/Login"
-
+import Login from "./pages/Authentication/Login";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const auth = getAuth(app);
 
@@ -44,18 +45,23 @@ function App() {
       );
     } else {
       return (
-        <Routes>
-          <Route path="/myFavourites" element={<Myfavourites />} />
-          <Route path="/" element={<Home user={user} />} />
-          <Route path="/product/:id" element={<ProductDetail user={user} />} />
-          <Route
-            path="/myFavourites"
-            element={
-              <Myfavourites title="Mobile Phones" apiCategory="smartphones" />
-            }
-          />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
+        <>
+          <Routes>
+            <Route path="/myFavourites" element={<Myfavourites />} />
+            <Route path="/" element={<Home user={user} />} />
+            <Route
+              path="/product/:id"
+              element={<ProductDetail user={user} />}
+            />
+            <Route
+              path="/myFavourites"
+              element={
+                <Myfavourites title="Mobile Phones" apiCategory="smartphones" />
+              }
+            />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </>
       );
     }
   };
@@ -64,6 +70,7 @@ function App() {
     <>
       {user !== null && <Navbar user={user} />}
       {renderRoutes()}
+      <ToastContainer />
     </>
   );
 }

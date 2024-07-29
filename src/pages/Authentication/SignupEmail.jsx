@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { app } from "../../firebase/firebase";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 const SignupEmail = () => {
   const [fname, setfName] = useState("");
@@ -15,6 +16,14 @@ const SignupEmail = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // add validation here
+    if (!fname) {
+      toast.error("Enter your First Name");
+      return;
+    } else if (!lname) {
+      toast.error("Enter your Last Name");
+      return;
+    }
     // Add Authentication
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -33,6 +42,7 @@ const SignupEmail = () => {
       });
     } catch (error) {
       console.error("Error signing up:", error);
+      toast.error(error.message);
     }
   };
   return (
@@ -46,7 +56,6 @@ const SignupEmail = () => {
               name="firstName"
               value={fname}
               onChange={(e) => setfName(e.target.value)}
-              required
               className="mt-1 px-3 py-2 border rounded-md focus:outline-none focus:border-indigo-500 w-full sm:text-sm"
             />
           </div>
@@ -58,7 +67,6 @@ const SignupEmail = () => {
               name="lastName"
               value={lname}
               onChange={(e) => setlName(e.target.value)}
-              required
               className="mt-1 px-3 py-2 border rounded-md focus:outline-none focus:border-indigo-500 w-full sm:text-sm"
             />
           </div>
@@ -70,7 +78,6 @@ const SignupEmail = () => {
               type="email"
               value={email}
               name="email"
-              required
               onChange={(e) => setEmail(e.target.value)}
               className="mt-1 px-3 py-2 border rounded-md focus:outline-none focus:border-indigo-500 w-full sm:text-sm"
             />
@@ -84,7 +91,6 @@ const SignupEmail = () => {
               value={password}
               name="password"
               onChange={(e) => setPassword(e.target.value)}
-              required
               className="mt-1 px-3 py-2 border rounded-md focus:outline-none focus:border-indigo-500 w-full sm:text-sm"
             />
           </div>
