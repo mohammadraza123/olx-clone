@@ -15,3 +15,18 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     </BrowserRouter>
   </React.StrictMode>
 );
+
+
+// ui design 
+
+// onClick 
+
+// handle function => use dispatch
+
+// go to store 
+
+// access reducer with reducer name 
+
+// create reducer 
+
+// than again go to the final state on store 
