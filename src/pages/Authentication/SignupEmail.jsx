@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { app } from "../../firebase/firebase";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 const SignupEmail = () => {
   const [fname, setfName] = useState("");
@@ -46,6 +46,7 @@ const SignupEmail = () => {
     }
   };
   return (
+    <>
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-96">
         <h1 className="text-2xl font-semibold mb-6 text-center">Sign Up</h1>
@@ -103,6 +104,8 @@ const SignupEmail = () => {
         </form>
       </div>
     </div>
+    <ToastContainer />
+    </>
   );
 };
 

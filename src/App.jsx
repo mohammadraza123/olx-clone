@@ -11,7 +11,6 @@ import SignupEmail from "./pages/Authentication/SignupEmail";
 import ProductDetail from "./pages/ProductDetail";
 import Home from "./pages/Home";
 import Login from "./pages/Authentication/Login";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const auth = getAuth(app);
@@ -70,7 +69,6 @@ function App() {
     <>
       {user !== null && <Navbar user={user} />}
       {renderRoutes()}
-      <ToastContainer />
     </>
   );
 }
