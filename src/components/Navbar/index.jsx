@@ -13,15 +13,17 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { IoChevronDown } from "react-icons/io5";
 import { MdLogout } from "react-icons/md";
 import { menuItems } from "../../categories";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { app } from "../../firebase/firebase";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { getFirestore, getDoc, doc } from "firebase/firestore";
 import { ToastContainer, toast } from "react-toastify";
 
 const navigation = [
-  { name: "Dashboard", to: "/", current: true },
-  { name: "Team", to: "/team", current: false },
+  { name: "Start selling", to: "/", current: true },
+  { name: "My ads", to: "/team", current: false },
+  { name: "Chat", to: "/team", current: false },
+  { name: "Help", to: "/team", current: false },
 ];
 
 function classNames(...classes) {
@@ -71,7 +73,7 @@ export default function Navbar({ user }) {
               <div className="relative flex-col p-2 h-16 items-center justify-between">
                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                   {/* Mobile menu button */}
-                  <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white ">
+                  <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-500">
                     <span className="absolute -inset-0.5" />
                     {open ? (
                       <HiOutlineXMark className=" h-6 w-6" />
@@ -213,14 +215,37 @@ export default function Navbar({ user }) {
             </div>
             <Disclosure.Panel className="sm:hidden">
               <div className="space-y-1 px-2 pb-3 pt-2">
+                <div className="flex gap-5 items-center">
+                  <div>
+                    <img src={profileIcon} height={45} width={48} />
+                  </div>
+                  {user ? (
+                    <div>
+                      Hello,
+                      <br />
+                      <p className="font-bold">{username}</p>
+                    </div>
+                  ) : (
+                    <div>
+                      <p className="text-sm"> Enter to your account</p>
+                      <Link to="/login">
+                        <p className=" underline text-sm">
+                          {" "}
+                          Log in to your account
+                        </p>
+                      </Link>
+                    </div>
+                  )}
+                </div>
+
                 {navigation.map((item) => (
                   <Link
                     key={item.name}
                     to={item.to}
                     className={classNames(
                       item.current
-                        ? "bg-gray-900 text-white"
-                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                        ? " hover:bg-[#d3fcfc] text-black"
+                        : "text-black hover:bg-[#d3fcfc]",
                       "block rounded-md px-3 py-2 text-base font-medium"
                     )}
                     aria-current={item.current ? "page" : undefined}
@@ -228,6 +253,18 @@ export default function Navbar({ user }) {
                     {item.name}
                   </Link>
                 ))}
+                <div>
+                  <Link to="/login">
+                    <div className="bg-[#002f34] p-3 text-center text-white font-bold rounded-md mb-3">
+                      <button>Login</button>
+                    </div>
+                  </Link>
+                  <Link to="/signup">
+                    <div className=" border-2 border-[#002f34] p-3 text-center text-[#002f34] font-bold rounded-md">
+                      <button>Create a new account</button>
+                    </div>
+                  </Link>
+                </div>
               </div>
             </Disclosure.Panel>
           </>
