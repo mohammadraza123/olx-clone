@@ -55,7 +55,7 @@ function App() {
             <Route
               path="/myFavourites"
               element={
-                <Myfavourites title="Mobile Phones" apiCategory="smartphones" />
+                <Myfavourites />
               }
             />
             <Route path="*" element={<Navigate to="/" />} />

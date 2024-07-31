@@ -2,14 +2,17 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addItem } from "../../redux/slices/favouritesItem";
 
 function ItemsCard(props) {
+  const dispatch = useDispatch();
   const [data, setData] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchApi();
-  }, []);
+  }, [props.apiCategory]); // Ensure the effect re-runs if the apiCategory prop changes
 
   const fetchApi = () => {
     const url = `https://dummyjson.com/products/category/${props.apiCategory}?limit=4`;
@@ -33,18 +36,24 @@ function ItemsCard(props) {
             <div
               key={index}
               className="flex-none w-72 rounded border border-[#d8dfe0] bg-white cursor-pointer"
-              style={{ minWidth: "280px" }} // Adjust as needed for mobile view
+              style={{ minWidth: "280px" }}
               onClick={() => navigate(`/product/${item.id}`)}
             >
               <img
                 className="w-full h-48 object-cover"
                 src={item.images[0]}
-                alt=""
+                alt={item.title}
               />
               <div className="px-4 py-2 flex items-center justify-between">
                 <div className="font-bold text-xl mb-2">{`$ ${item.price}`}</div>
                 <div>
-                  <FaRegHeart className="w-full h-5" />
+                  <FaRegHeart
+                    className="w-full h-5"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      dispatch(addItem(item));
+                    }}
+                  />
                 </div>
               </div>
               <div>
