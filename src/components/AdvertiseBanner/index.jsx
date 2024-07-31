@@ -7,7 +7,7 @@ export default function AdvertiseBanner() {
       <div>
         <img
           src={advertisebanner}
-          className=" w-[1500px] md:h-56 rounded object-contain md:object-cover"
+          className="w-full h-auto rounded md:w-[1500px] md:h-56 object-cover"
           alt="Advertisement Banner"
         />
       </div>

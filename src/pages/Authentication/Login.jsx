@@ -18,7 +18,7 @@ const Login = () => {
   return (
     <>
       <div className="flex justify-center items-center min-h-screen">
-        <div className="max-w-sm w-full rounded-lg shadow-lg bg-white p-6  border border-gray-200">
+        <div className="max-w-sm w-full md:rounded-lg md:shadow-lg bg-white p-6  md:border border-gray-200">
           <div className="flex justify-end pb-2">
             <Link className="text-3xl" to="/">
               <IoClose />

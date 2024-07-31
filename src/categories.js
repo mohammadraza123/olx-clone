@@ -5,7 +5,6 @@ import { MdHelpOutline } from "react-icons/md";
 import { LuSettings } from "react-icons/lu";
 import { RiBillLine } from "react-icons/ri";
 import { CgCreditCard } from "react-icons/cg";
-import { Link } from "react-router-dom";
 
 export const categories = [
   {
