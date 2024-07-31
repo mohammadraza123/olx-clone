@@ -18,12 +18,16 @@ import { app } from "../../firebase/firebase";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { getFirestore, getDoc, doc } from "firebase/firestore";
 import { ToastContainer, toast } from "react-toastify";
+import { CiCamera } from "react-icons/ci";
+import { IoDocumentTextOutline } from "react-icons/io5";
+import { BsChat } from "react-icons/bs";
+import { IoMdHelpCircleOutline } from "react-icons/io";
 
 const navigation = [
-  { name: "Start selling", to: "/", current: true },
-  { name: "My ads", to: "/team", current: false },
-  { name: "Chat", to: "/team", current: false },
-  { name: "Help", to: "/team", current: false },
+  { name: "Start selling", icon: CiCamera, to: "/", current: true },
+  { name: "My ads", to: "/team", icon: IoDocumentTextOutline, current: false },
+  { name: "Chat", to: "/team", icon: BsChat, current: false },
+  { name: "Help", to: "/team", icon: IoMdHelpCircleOutline, current: false },
 ];
 
 function classNames(...classes) {
@@ -213,7 +217,7 @@ export default function Navbar({ user }) {
                 </div>
               </div>
             </div>
-            <Disclosure.Panel className="sm:hidden">
+            <Disclosure.Panel className="sm:hidden h-screen overflow-y-auto">
               <div className="space-y-1 px-2 pb-3 pt-2">
                 <div className="flex gap-5 items-center">
                   <div>
@@ -229,8 +233,7 @@ export default function Navbar({ user }) {
                     <div>
                       <p className="text-sm"> Enter to your account</p>
                       <Link to="/login">
-                        <p className=" underline text-sm">
-                          {" "}
+                        <p className="underline text-sm">
                           Log in to your account
                         </p>
                       </Link>
@@ -238,29 +241,53 @@ export default function Navbar({ user }) {
                   )}
                 </div>
 
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.to}
-                    className={classNames(
-                      item.current
-                        ? " hover:bg-[#d3fcfc] text-black"
-                        : "text-black hover:bg-[#d3fcfc]",
-                      "block rounded-md px-3 py-2 text-base font-medium"
-                    )}
-                    aria-current={item.current ? "page" : undefined}
+                <div>
+                  {user
+                    ? menuItems.map((item) => (
+                        <div
+                          key={item.text}
+                          className="flex items-center gap-5 hover:bg-[#d3fcfc] rounded-md px-3 py-2 text-base font-medium"
+                        >
+                          <item.icon fontSize="25" />
+                          <p>{item.text}</p>
+                        </div>
+                      ))
+                    : navigation.map((item) => (
+                        <Link
+                          key={item.name}
+                          to={item.to}
+                          className={classNames(
+                            item.current
+                              ? "hover:bg-[#d3fcfc] text-black"
+                              : "text-black hover:bg-[#d3fcfc]",
+                            "block rounded-md px-3 py-2 text-base font-medium"
+                          )}
+                          aria-current={item.current ? "page" : undefined}
+                        >
+                          <div className="flex items-center gap-5">
+                            <item.icon fontSize="25" />
+                            {item.name}
+                          </div>
+                        </Link>
+                      ))}
+                </div>
+                {user && (
+                  <div
+                    className="flex items-center gap-5 py-2 px-3 hover:bg-[#d3fcfc] cursor-pointer m-18"
+                    onClick={() => signOut(auth)}
                   >
-                    {item.name}
-                  </Link>
-                ))}
+                    <MdLogout className="text-2xl" />
+                    <p>Logout</p>
+                  </div>
+                )}
                 <div>
                   <Link to="/login">
-                    <div className="bg-[#002f34] p-3 text-center text-white font-bold rounded-md mb-3">
+                    <div className="bg-[#002f34] p-3 text-center text-white font-bold rounded-md mt-3 mb-3">
                       <button>Login</button>
                     </div>
                   </Link>
                   <Link to="/signup">
-                    <div className=" border-2 border-[#002f34] p-3 text-center text-[#002f34] font-bold rounded-md">
+                    <div className="border-2 border-[#002f34] p-3 text-center text-[#002f34] font-bold rounded-md">
                       <button>Create a new account</button>
                     </div>
                   </Link>
