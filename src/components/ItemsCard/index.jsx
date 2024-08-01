@@ -4,15 +4,17 @@ import { FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addItem } from "../../redux/slices/favouritesItem";
-
 function ItemsCard(props) {
-  const dispatch = useDispatch();
   const [data, setData] = useState([]);
   const navigate = useNavigate();
 
+const dispatch = useDispatch()
+
+
+
   useEffect(() => {
     fetchApi();
-  }, [props.apiCategory]); // Ensure the effect re-runs if the apiCategory prop changes
+  }, [props.apiCategory]);
 
   const fetchApi = () => {
     const url = `https://dummyjson.com/products/category/${props.apiCategory}?limit=4`;
@@ -26,6 +28,12 @@ function ItemsCard(props) {
     const randomDays = Math.floor(Math.random() * 30 + 1);
     return `${randomDays} days ago`;
   };
+
+// const handleItems =(e,item)=>{
+// e.stopPropagation()
+// dispatch(addItem(item))
+
+// }
 
   return (
     <div className="mx-auto max-w-7xl px-2 pt-3 sm:px-6 lg:px-8">
@@ -46,13 +54,15 @@ function ItemsCard(props) {
               />
               <div className="px-4 py-2 flex items-center justify-between">
                 <div className="font-bold text-xl mb-2">{`$ ${item.price}`}</div>
-                <div>
+                <div
+                // onClick={handleItems}
+                onClick={(e)=> {
+                  e.stopPropagation();
+                  dispatch(addItem(item))}}
+                >
                   <FaRegHeart
                     className="w-full h-5"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      dispatch(addItem(item));
-                    }}
+                   
                   />
                 </div>
               </div>
