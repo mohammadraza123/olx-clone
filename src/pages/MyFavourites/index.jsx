@@ -3,18 +3,20 @@ import { FaRegHeart } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { removeItem } from '../../redux/slices/favouritesItem';
+import { getRandomDays } from '../../services/helper';
 
 const index = () => {
 
 const dispatch = useDispatch();
 
-  const getRandomDays = () => {
-    const randomDays = Math.floor(Math.random() * 30 + 1);
-    return `${randomDays} days ago`;
-  };
   const navigate = useNavigate();
 
   const cart = useSelector((state) => state.favourites.wishList)
+
+const handleRemoveItems =(e,item)=>{
+e.stopPropagation();
+dispatch(removeItem(item));
+}
 
   return (
     <div className="mx-auto max-w-7xl px-2 pt-3 sm:px-6 lg:px-8">
@@ -36,16 +38,8 @@ const dispatch = useDispatch();
               <div className="px-4 py-2 flex items-center justify-between">
                 <div className="font-bold text-xl mb-2">{`$ ${item.price}`}</div>
                 <div
-                onClick={
-                  (e)=>{
-                    e.stopPropagation();
-                    dispatch(removeItem(item));
-                  }}
-                >
-                  <FaRegHeart
-                    className="w-full h-5"
-                   
-                  />
+                  onClick={(e)=> handleRemoveItems(e,item)} >
+                  <FaRegHeart className="w-full h-5" />
                 </div>
               </div>
               <div>
@@ -60,7 +54,7 @@ const dispatch = useDispatch();
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default index

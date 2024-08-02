@@ -5,6 +5,7 @@ import { FaRegHeart } from "react-icons/fa";
 import Slider from "../../components/Slider";
 import Categories from "../../components/Categories";
 import Footer from "../../components/Footer"
+import { API_URL, getRandomDays } from "../../services/helper";
 
 
 const ProductDetail = ({ user }) => {
@@ -14,9 +15,7 @@ const ProductDetail = ({ user }) => {
   useEffect(() => {
     const fetchApi = async () => {
       try {
-        const response = await axios.get(
-          `https://dummyjson.com/products/${id}`
-        );
+        const response = await axios.get(`${API_URL}${id}`);
         setData(response.data);
       } catch (error) {
         console.log(error);
@@ -32,11 +31,6 @@ const ProductDetail = ({ user }) => {
         <p className="text-lg font-medium">Loading...</p>
       </div>
     );
-  }
-
-  function getRandomDays() {
-    const randomDays = Math.floor(Math.random() * 30 + 1);
-    return `${randomDays} days ago`;
   }
 
   return (

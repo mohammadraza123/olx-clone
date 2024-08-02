@@ -4,36 +4,31 @@ import { FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addItem } from "../../redux/slices/favouritesItem";
+import { API_URL, getRandomDays } from "../../services/helper";
+
 function ItemsCard(props) {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
 
 const dispatch = useDispatch()
 
-
-
   useEffect(() => {
     fetchApi();
   }, [props.apiCategory]);
 
   const fetchApi = () => {
-    const url = `https://dummyjson.com/products/category/${props.apiCategory}?limit=4`;
+    const url = `${API_URL}category/${props.apiCategory}?limit=4`;
     axios
       .get(url)
       .then((response) => setData(response.data.products))
       .catch((err) => console.log(err));
   };
 
-  const getRandomDays = () => {
-    const randomDays = Math.floor(Math.random() * 30 + 1);
-    return `${randomDays} days ago`;
-  };
+  const handleAddItems = (e, item)=>{
+e.stopPropagation();
+dispatch(addItem(item));
 
-// const handleItems =(e,item)=>{
-// e.stopPropagation()
-// dispatch(addItem(item))
-
-// }
+  }
 
   return (
     <div className="mx-auto max-w-7xl px-2 pt-3 sm:px-6 lg:px-8">
@@ -54,16 +49,10 @@ const dispatch = useDispatch()
               />
               <div className="px-4 py-2 flex items-center justify-between">
                 <div className="font-bold text-xl mb-2">{`$ ${item.price}`}</div>
-                <div
-                // onClick={handleItems}
-                onClick={(e)=> {
-                  e.stopPropagation();
-                  dispatch(addItem(item))}}
-                >
-                  <FaRegHeart
-                    className="w-full h-5"
-                   
-                  />
+                <div onClick={(e) => handleAddItems(e, item)}>
+                    <FaRegHeart className="w-full h-5 " />
+
+                    {/* <FaHeart className="w-full h-5 " /> */}
                 </div>
               </div>
               <div>
