@@ -24,43 +24,55 @@ const dispatch = useDispatch()
       .catch((err) => console.log(err));
   };
 
-  const handleAddItems = (e, item)=>{
-e.stopPropagation();
-dispatch(addItem(item));
+//   const handleAddItems = (e, item)=>{
+// e.stopPropagation();
+// dispatch(addItem(item));
 
-  }
+//   }
 
   return (
     <div className="mx-auto max-w-7xl px-2 pt-3 sm:px-6 lg:px-8">
-      <h1 className="font-bold pt-4 pb-4 text-2xl">{props.title}</h1>
-      <div className="overflow-x-auto">
+      <h1 className="font-bold pt-4 pb-4 text-xl md:text-2xl">{props.title}</h1>
+      <div
+        className="overflow-x-auto"
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+      >
         <div className="flex space-x-4">
           {data.map((item, index) => (
             <div
               key={index}
-              className="flex-none w-72 rounded border border-[#d8dfe0] bg-white cursor-pointer"
-              style={{ minWidth: "280px" }}
+              className="flex-none w-64 sm:w-72 rounded border border-[#d8dfe0] bg-white cursor-pointer"
               onClick={() => navigate(`/product/${item.id}`)}
             >
               <img
-                className="w-full h-48 object-cover"
+                className="w-full h-32 sm:h-48 object-cover"
                 src={item.images[0]}
                 alt={item.title}
               />
               <div className="px-4 py-2 flex items-center justify-between">
-                <div className="font-bold text-xl mb-2">{`$ ${item.price}`}</div>
-                <div onClick={(e) => handleAddItems(e, item)}>
-                    <FaRegHeart className="w-full h-5 " />
-
-                    {/* <FaHeart className="w-full h-5 " /> */}
+                <div className="font-bold text-lg sm:text-xl mb-2">{`$ ${item.price}`}</div>
+                <div>
+                  <FaRegHeart
+                    className="w-full h-5"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      dispatch(addItem(item));
+                    }}
+                  />
                 </div>
               </div>
               <div>
-                <p className="px-4 text-gray-700 text-base">{item.title}</p>
+                <p className="px-4 text-gray-700 text-sm sm:text-base">
+                  {item.title}
+                </p>
               </div>
               <div className="px-4 pt-4 pb-2">
-                <p className="text-gray-700 text-base">{item.returnPolicy}</p>
-                <p className="text-gray-700 text-base">{getRandomDays()}</p>
+                <p className="text-gray-700 text-sm sm:text-base">
+                  {item.returnPolicy}
+                </p>
+                <p className="text-gray-700 text-sm sm:text-base">
+                  {getRandomDays()}
+                </p>
               </div>
             </div>
           ))}

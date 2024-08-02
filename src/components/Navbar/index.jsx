@@ -6,7 +6,7 @@ import profileIcon from "/assets/icons/profile-icon.png";
 import propertyIcon from "/assets/icons/property-icon.png";
 import { Disclosure } from "@headlessui/react";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
-import { HiBars3, HiOutlineXMark } from "react-icons/hi2";
+import { HiBars3 } from "react-icons/hi2";
 import { IoIosArrowDown } from "react-icons/io";
 import { FaSearch } from "react-icons/fa";
 import { HiOutlineLocationMarker } from "react-icons/hi";
@@ -74,19 +74,19 @@ export default function Navbar({ user }) {
         {({ open }) => (
           <>
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-              <div className="relative flex-col p-2 h-16 items-center justify-between">
+              <div className="relative flex flex-col p-2 h-16 items-center md:items-start justify-between">
                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                   {/* Mobile menu button */}
                   <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-500">
                     <span className="absolute -inset-0.5" />
                     {open ? (
-                      <HiOutlineXMark className=" h-6 w-6" />
+                      <HiBars3 className=" h-6 w-6" />
                     ) : (
                       <HiBars3 className=" h-6 w-6" />
                     )}
                   </Disclosure.Button>
                 </div>
-                <div className="flex flex-1 items-center justify-center gap-9 sm:items-stretch sm:justify-start">
+                <div className="flex flex-1 items-center justify-center gap-5 md:gap-9 sm:items-stretch sm:justify-start ml-[22px] md:ml-0">
                   <div className="flex flex-shrink-0 items-center">
                     <Link to="/">
                       <img
@@ -97,7 +97,7 @@ export default function Navbar({ user }) {
                     </Link>
                   </div>
 
-                  <div className="flex gap-2 justify-center items-center text-center hover:text-blue-400">
+                  <div className="flex gap-2 justify-center items-center text-center hover:text-blue-400 cursor-pointer">
                     <div className="w-9 h-9 border border-black rounded-full flex justify-center items-center">
                       <img src={carIcon} width="25px" alt="Car Icon" />
                     </div>
@@ -105,7 +105,7 @@ export default function Navbar({ user }) {
                       <h3 className="font-bold">Motors</h3>
                     </div>
                   </div>
-                  <div className="flex gap-2 justify-center items-center text-center hover:text-blue-400">
+                  <div className="flex gap-2 justify-center items-center text-center hover:text-blue-400 cursor-pointer">
                     <div className="w-10 h-10 border border-black rounded-full flex justify-center items-center">
                       <img
                         src={propertyIcon}
@@ -280,18 +280,20 @@ export default function Navbar({ user }) {
                     <p>Logout</p>
                   </div>
                 )}
-                <div>
-                  <Link to="/login">
-                    <div className="bg-[#002f34] p-3 text-center text-white font-bold rounded-md mt-3 mb-3">
-                      <button>Login</button>
-                    </div>
-                  </Link>
-                  <Link to="/signup">
-                    <div className="border-2 border-[#002f34] p-3 text-center text-[#002f34] font-bold rounded-md">
-                      <button>Create a new account</button>
-                    </div>
-                  </Link>
-                </div>
+                {!user && (
+                  <div>
+                    <Link to="/login">
+                      <div className="bg-[#002f34] p-3 text-center text-white font-bold rounded-md mt-3 mb-3">
+                        <button>Login</button>
+                      </div>
+                    </Link>
+                    <Link to="/signup">
+                      <div className="border-2 border-[#002f34] p-3 text-center text-[#002f34] font-bold rounded-md">
+                        <button>Create a new account</button>
+                      </div>
+                    </Link>
+                  </div>
+                )}
               </div>
             </Disclosure.Panel>
           </>
