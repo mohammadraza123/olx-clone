@@ -5,17 +5,25 @@ const initialState = {
 }
 
 export const favouritesSlice = createSlice({
-  name: 'favourites',
+  name: "favourites",
   initialState,
   reducers: {
-    addItem: (state,action) => {
-      state.wishList.push(action.payload)
+    addItem: (state, action) => {
+      // const temp =state.wishList.push(action.payload)
+      const exists = state.wishList.some((item) => item.id ===action.payload.id)
+
+      if (!exists){
+        state.wishList.push(action.payload);
+      }
+     
     },
-    removeItem: (state,action) => {
- state.wishList = state.wishList.filter((item) => item.id !== action.payload.id);
-    }
+    removeItem: (state, action) => {
+      state.wishList = state.wishList.filter(
+        (item) => item.id !== action.payload.id
+      );
+    },
   },
-})
+});
 
 export const { addItem, removeItem } = favouritesSlice.actions;
 

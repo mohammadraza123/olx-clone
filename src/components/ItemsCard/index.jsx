@@ -24,11 +24,11 @@ const dispatch = useDispatch()
       .catch((err) => console.log(err));
   };
 
-//   const handleAddItems = (e, item)=>{
-// e.stopPropagation();
-// dispatch(addItem(item));
+  const handleAddItems = (e, item)=>{
+e.stopPropagation();
+dispatch(addItem(item));
 
-//   }
+  }
 
   return (
     <div className="mx-auto max-w-7xl px-2 pt-3 sm:px-6 lg:px-8">
@@ -54,10 +54,7 @@ const dispatch = useDispatch()
                 <div>
                   <FaRegHeart
                     className="w-full h-5"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      dispatch(addItem(item));
-                    }}
+                    onClick={(e)=>handleAddItems(e,item)}
                   />
                 </div>
               </div>

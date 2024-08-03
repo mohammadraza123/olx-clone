@@ -19,10 +19,9 @@ dispatch(removeItem(item));
 }
 
   return (
-    <div className="mx-auto max-w-7xl px-2 pt-3 sm:px-6 lg:px-8">
+    <div className="mx-auto w-full px-2 pt-3 sm:px-6 lg:px-8">
       <h1 className="font-bold pt-4 pb-4 text-2xl">My Favourites</h1>
-      <div className="overflow-x-auto">
-        <div className="flex space-x-4">
+        <div className="grid grid-cols-4 gap-6">
           {cart.map((item, index) => (
             <div
               key={index}
@@ -53,7 +52,6 @@ dispatch(removeItem(item));
           ))}
         </div>
       </div>
-    </div>
   );
 }
 
