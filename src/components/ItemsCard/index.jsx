@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { FaRegHeart } from "react-icons/fa";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addItem } from "../../redux/slices/favouritesItem";
+import { addItem, removeItem } from "../../redux/slices/favouritesItem";
 import { API_URL, getRandomDays } from "../../services/helper";
 
 function ItemsCard(props) {
   const [data, setData] = useState([]);
+  const [favorites, setFavorites] = useState({});
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-const dispatch = useDispatch()
+
 
   useEffect(() => {
     fetchApi();
@@ -20,15 +22,30 @@ const dispatch = useDispatch()
     const url = `${API_URL}category/${props.apiCategory}?limit=4`;
     axios
       .get(url)
-      .then((response) => setData(response.data.products))
+      .then((response) => {
+        setData(response.data.products);
+        const initialFavorites = {};
+        response.data.products.forEach((item) => {
+          initialFavorites[item.id] = false;
+        });
+        setFavorites(initialFavorites);
+      })
       .catch((err) => console.log(err));
   };
 
-  const handleAddItems = (e, item)=>{
-e.stopPropagation();
-dispatch(addItem(item));
+  const handleAddItems = (e, item) => {
+    e.stopPropagation();
+    dispatch(addItem(item));
+    setFavorites((prev) => ({
+      ...prev,
+      [item.id]: !prev[item.id],
+    }));
+  };
 
-  }
+  const handleRemoveItems =(e,item)=>{
+    e.stopPropagation();
+    dispatch(removeItem(item));
+    }
 
   return (
     <div className="mx-auto max-w-7xl px-2 pt-3 sm:px-6 lg:px-8">
@@ -52,10 +69,18 @@ dispatch(addItem(item));
               <div className="px-4 py-2 flex items-center justify-between">
                 <div className="font-bold text-lg sm:text-xl mb-2">{`$ ${item.price}`}</div>
                 <div>
-                  <FaRegHeart
-                    className="w-full h-5"
-                    onClick={(e)=>handleAddItems(e,item)}
-                  />
+                  {favorites[item.id] ? (
+                    
+                    <FaHeart
+                      className="w-full h-5"
+                      onClick={(e) => handleRemoveItems(e, item)}
+                    />
+                  ) : (
+                    <FaRegHeart
+                      className="w-full h-5"
+                      onClick={(e) => handleAddItems(e, item)}
+                    />
+                  )}
                 </div>
               </div>
               <div>

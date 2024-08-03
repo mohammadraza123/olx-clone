@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaRegHeart } from 'react-icons/fa';
+import { FaHeart } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { removeItem } from '../../redux/slices/favouritesItem';
@@ -38,7 +38,7 @@ dispatch(removeItem(item));
                 <div className="font-bold text-xl mb-2">{`$ ${item.price}`}</div>
                 <div
                   onClick={(e)=> handleRemoveItems(e,item)} >
-                  <FaRegHeart className="w-full h-5" />
+                  <FaHeart className="w-full h-5" />
                 </div>
               </div>
               <div>

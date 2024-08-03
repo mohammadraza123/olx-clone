@@ -9,7 +9,6 @@ export const favouritesSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, action) => {
-      // const temp =state.wishList.push(action.payload)
       const exists = state.wishList.some((item) => item.id ===action.payload.id)
 
       if (!exists){
