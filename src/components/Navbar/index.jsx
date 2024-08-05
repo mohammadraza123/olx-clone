@@ -11,7 +11,7 @@ import { FaSearch } from "react-icons/fa";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { IoChevronDown, IoDocumentTextOutline } from "react-icons/io5";
 import { MdLogout } from "react-icons/md";
-import { menuItems } from "../../categories";
+import { menuItems, menuMobileItems } from "../../categories";
 import { Link } from "react-router-dom";
 import { app } from "../../firebase/firebase";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
@@ -317,11 +317,13 @@ export default function Navbar({ user }) {
                     <img src={profileIcon} height={45} width={48} />
                   </div>
                   {user ? (
-                    <div>
-                      Hello,
-                      <br />
-                      <p className="font-bold">{username}</p>
-                    </div>
+                    <>
+                      <div>
+                        Hello,
+                        <br />
+                        <p className="font-bold">{username}</p>
+                      </div>
+                    </>
                   ) : (
                     <div>
                       <p className="text-sm"> Enter to your account</p>
@@ -336,14 +338,16 @@ export default function Navbar({ user }) {
 
                 <div>
                   {user
-                    ? menuItems.map((item) => (
-                        <div
-                          key={item.text}
-                          className="flex items-center gap-5 hover:bg-[#d3fcfc] rounded-md px-3 py-2 text-base font-medium"
-                        >
-                          <item.icon fontSize="25" />
-                          <p>{item.text}</p>
-                        </div>
+                    ? menuMobileItems.map((item) => (
+                        <Link to={item.href}>
+                          <div
+                            key={item.id}
+                            className="flex items-center gap-5 hover:bg-[#d3fcfc] rounded-md px-3 py-2 text-base font-medium"
+                          >
+                            <item.icon fontSize="25" />
+                            <p>{item.text}</p>
+                          </div>
+                        </Link>
                       ))
                     : navigation.map((item) => (
                         <Link
