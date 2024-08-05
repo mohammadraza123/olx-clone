@@ -7,21 +7,21 @@ import propertyIcon from "/assets/icons/property-icon.png";
 import { Disclosure } from "@headlessui/react";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { HiBars3 } from "react-icons/hi2";
-import { IoIosArrowDown } from "react-icons/io";
 import { FaSearch } from "react-icons/fa";
 import { HiOutlineLocationMarker } from "react-icons/hi";
-import { IoChevronDown } from "react-icons/io5";
+import { IoChevronDown, IoDocumentTextOutline } from "react-icons/io5";
 import { MdLogout } from "react-icons/md";
 import { menuItems } from "../../categories";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { app } from "../../firebase/firebase";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { getFirestore, getDoc, doc } from "firebase/firestore";
 import { ToastContainer, toast } from "react-toastify";
 import { CiCamera } from "react-icons/ci";
-import { IoDocumentTextOutline } from "react-icons/io5";
 import { BsChat } from "react-icons/bs";
 import { IoMdHelpCircleOutline } from "react-icons/io";
+import axios from "axios";
+import { PuffLoader } from "react-spinners";
 
 const navigation = [
   { name: "Start selling", icon: CiCamera, to: "/", current: true },
@@ -30,14 +30,23 @@ const navigation = [
   { name: "Help", to: "/team", icon: IoMdHelpCircleOutline, current: false },
 ];
 
+const locationMenu = ["Account settings", "Support", "License", "Sign out"];
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Navbar({ user }) {
-  const [username, setUsername] = useState("");
   const auth = getAuth(app);
+  const [username, setUsername] = useState("");
   const firestore = getFirestore(app);
+  const [selectedItem, setSelectedItem] = useState("Location or Compound");
+  const [location, setLocation] = useState("Use current location");
+  const [loading, setLoading] = useState(false);
+
+  const handleSelect = (item) => {
+    setSelectedItem(item);
+  };
 
   useEffect(() => {
     const fetchUsername = async (user) => {
@@ -64,6 +73,44 @@ export default function Navbar({ user }) {
 
     return () => unsubscribe();
   }, [auth, firestore]);
+
+  // Location Logic
+  const getLocation = async () => {
+    setLoading(true);
+
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        try {
+          const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+          const response = await axios.get(url);
+          setLoading(false);
+          const town =
+            response.data.address?.town ||
+            response.data.address?.city ||
+            "Location not found";
+          setLocation(town);
+          setSelectedItem(town);
+          console.log("position", position);
+        } catch (err) {
+          setLoading(false);
+          setLocation("Unable to fetch");
+          setSelectedItem("Please try again");
+          console.error(err);
+        }
+      },
+      (err) => {
+        setLoading(false);
+        setLocation("Unable to fetch location");
+        setSelectedItem("Please try again");
+        console.error(err);
+      }
+    );
+  };
+
+  // Usage
 
   return (
     <>
@@ -120,15 +167,61 @@ export default function Navbar({ user }) {
                 </div>
               </div>
               <div className="hidden md:flex flex-row items-center gap-4">
-                <div className="relative w-72">
-                  <HiOutlineLocationMarker className="h-6 w-6 absolute top-1/2 left-2 transform -translate-y-1/2 pointer-events-none" />
-                  <select className="border border-[#d8dfe0] w-full h-12 pl-10 pr-10 outline-none appearance-none rounded">
-                    <option>Pakistan</option>
-                    <option>Sindh</option>
-                    <option>Punjab</option>
-                  </select>
-                  <IoIosArrowDown className="h-7 w-7 absolute top-1/2 right-2 transform -translate-y-1/2 pointer-events-none" />
-                </div>
+                <Menu as="div" className="relative w-72">
+                  <div>
+                    <Menu.Button className="inline-flex w-full justify-between items-center px-3 h-12 text-sm border border-[#d8dfe0] rounded">
+                      <div className="flex gap-2 items-center">
+                        {loading ? (
+                          <PuffLoader
+                            color={"blue"}
+                            loading={loading}
+                            size={30}
+                            aria-label="Loading Spinner"
+                            data-testid="loader"
+                          />
+                        ) : (
+                          <HiOutlineLocationMarker size={26} />
+                        )}
+                        <p className="block text-sm cursor-pointer whitespace-nowrap overflow-hidden text-ellipsis">
+                          {selectedItem}
+                        </p>
+                      </div>
+                      <IoChevronDown
+                        aria-hidden="true"
+                        className="-mr-1 h-6 w-6"
+                      />
+                    </Menu.Button>
+                  </div>
+
+                  <Menu.Items className="absolute w-72 bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none rounded">
+                    <Menu.Item>
+                      <div
+                        className=" px-4 py-4 text-md cursor-pointer text-blue-500 font-bold hover:bg-[#d3fcfc]"
+                        onClick={getLocation}
+                      >
+                        <div className="flex gap-2 items-center">
+                          <HiOutlineLocationMarker fontSize={26} />
+                          {location}
+                          {/* Use Current Location */}
+                        </div>
+                      </div>
+                    </Menu.Item>
+                    {locationMenu.map((item, index) => (
+                      <Menu.Item key={index}>
+                        <div
+                          className=" px-4 py-3 text-sm cursor-pointer hover:bg-[#d3fcfc]"
+                          onClick={() => handleSelect(item)}
+                        >
+                          <div className="flex gap-2 items-center">
+                            <HiOutlineLocationMarker size={26} />
+
+                            {item}
+                          </div>
+                        </div>
+                      </Menu.Item>
+                    ))}
+                  </Menu.Items>
+                </Menu>
 
                 <div className="relative w-2/4">
                   <input
@@ -203,7 +296,7 @@ export default function Navbar({ user }) {
                   ) : (
                     <Link
                       to="/login"
-                      className="underline font-bold cursor-pointer"
+                      className="border-black border-b-2 font-bold cursor-pointer"
                     >
                       Login
                     </Link>
@@ -211,7 +304,7 @@ export default function Navbar({ user }) {
                 </div>
                 <div className="relative">
                   <img src={buttonIcon} alt="Button Icon" className="block" />
-                  <h2 className="absolute inset-x-0 top-1/2 transform -translate-y-1/2 text-center font-bold cursor-pointer">
+                  <h2 className="absolute inset-x-0 top-1/2 -translate-y-1/2 text-center font-bold cursor-pointer">
                     + Sell
                   </h2>
                 </div>
