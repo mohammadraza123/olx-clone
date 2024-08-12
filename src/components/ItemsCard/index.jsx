@@ -45,6 +45,7 @@ function ItemsCard(props) {
   const handleRemoveItems =(e,item)=>{
     e.stopPropagation();
     dispatch(removeItem(item));
+
     }
 
   return (
@@ -69,7 +70,7 @@ function ItemsCard(props) {
               <div className="px-4 py-2 flex items-center justify-between">
                 <div className="font-bold text-lg sm:text-xl mb-2">{`$ ${item.price}`}</div>
                 <div>
-                  {favorites[item.id] ? (
+                {favorites[item.id] ? (
                     
                     <FaHeart
                       className="w-full h-5"

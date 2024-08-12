@@ -10,7 +10,7 @@ const googleProvider = new GoogleAuthProvider();
 
 const auth = getAuth(app);
 
-const Login = () => {
+const Login = (props) => {
   const joinWithGoogle = () => {
     signInWithPopup(auth, googleProvider);
   };
@@ -27,14 +27,14 @@ const Login = () => {
           <div className="text-center pb-4">
             <h1 className="text-4xl font-extrabold mb-8 text-[#002F34]">Olx</h1>
             <p className="text-[#002F34] font-semibold text-2xl">
-              Login into your OLX account
+              {props.heading}
             </p>
           </div>
           <div className="space-y-4">
             <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium border hover:border-2 border-black text-[#002F34] text-lg h-10 px-4 py-5 w-full">
               <div className="flex justify-center items-center ">
                 <FcGoogle className="mx-2 text-2xl" />
-                <button onClick={joinWithGoogle}>Login with Google</button>
+                <button onClick={joinWithGoogle}>{props.title}</button>
               </div>
             </button>
 
@@ -51,13 +51,13 @@ const Login = () => {
             >
               <div className="flex items-center justify-center">
                 <MdEmail className="mx-2 text-2xl" />
-                Login with Email
+                {props.title1}
               </div>
             </Link>
 
             <div className="flex justify-center py-2">
               <Link to="/signup" className="text-[#3A77FF] font-bold">
-                New to OLX? Create an account
+                {props.description}
               </Link>
             </div>
           </div>
