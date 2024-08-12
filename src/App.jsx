@@ -12,6 +12,7 @@ import ProductDetail from "./pages/ProductDetail";
 import Home from "./pages/Home";
 import Login from "./pages/Authentication/Login";
 import "react-toastify/dist/ReactToastify.css";
+import EditProfile from "./components/EditProfile";
 
 const auth = getAuth(app);
 
@@ -58,6 +59,7 @@ function App() {
                 <Myfavourites />
               }
             />
+            <Route path="/editProfile/info" element = {<EditProfile user = {user} />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </>

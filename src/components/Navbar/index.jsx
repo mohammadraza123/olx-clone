@@ -265,11 +265,13 @@ export default function Navbar({ user }) {
                             </div>
                           </MenuItem>
                           <MenuItem>
+                              <Link to= 'editProfile/info'>
                             <div className="flex justify-center py-3 px-4 border-b w-full">
                               <button className="border-2 border-black py-2 px-2 rounded-md w-full">
                                 View and edit your profile
                               </button>
                             </div>
+                              </Link>
                           </MenuItem>
                           {menuItems.map((item, index) => (
                             <MenuItem key={index}>
