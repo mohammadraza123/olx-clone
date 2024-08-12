@@ -5,6 +5,9 @@ import { MdHelpOutline } from "react-icons/md";
 import { LuSettings } from "react-icons/lu";
 import { RiBillLine } from "react-icons/ri";
 import { CgCreditCard } from "react-icons/cg";
+import { CiCamera } from "react-icons/ci";
+import { IoDocumentTextOutline, IoChatbubbleOutline } from "react-icons/io5";
+import { IoMdNotificationsOutline } from "react-icons/io";
 
 export const categories = [
   {
@@ -187,14 +190,75 @@ export const allCategoriesWithImages = [
   },
 ];
 
-
-
 export const menuItems = [
-  { id:"myAds", icon: GrCopy, text: "My Ads", href: "/myAds" },
-  {id:"myFavourites", icon: FaRegHeart, text: "Favourites & Saved searches", href: "/myFavourites" },
-  {id:"publicProfile", icon: FiEye, text: "Public Profile" ,  href: "/public-profile" },
-  {id:"pkgs", icon: RiBillLine, text: "Buy Discounted Packages",  href: "/buy-discounted-packages" },
-  {id:"bills", icon: CgCreditCard, text: "Bought Packages and Billing",  href: "/bought-billing-pacakages" },
-  {id:"help", icon: MdHelpOutline, text: "Help" , href: "/help" },
-  {id:"settings", icon: LuSettings, text: "Settings", href: "/settings" },
+  { id: "myAds", icon: GrCopy, text: "My Ads", href: "/myAds" },
+  {
+    id: "myFavourites",
+    icon: FaRegHeart,
+    text: "Favourites & Saved searches",
+    href: "/myFavourites",
+  },
+  {
+    id: "publicProfile",
+    icon: FiEye,
+    text: "Public Profile",
+    href: "/public-profile",
+  },
+  {
+    id: "pkgs",
+    icon: RiBillLine,
+    text: "Buy Discounted Packages",
+    href: "/buy-discounted-packages",
+  },
+  {
+    id: "bills",
+    icon: CgCreditCard,
+    text: "Bought Packages and Billing",
+    href: "/bought-billing-pacakages",
+  },
+  { id: "help", icon: MdHelpOutline, text: "Help", href: "/help" },
+  { id: "settings", icon: LuSettings, text: "Settings", href: "/settings" },
+];
+
+export const menuMobileItems = [
+  { id: 1, text: "Start selling", icon: CiCamera, href: "/" },
+  {
+    id: 2,
+    text: "My ads",
+    icon: IoDocumentTextOutline,
+    href: "/team",
+  },
+  {
+    id: 3,
+    text: "Favourites & Saved searches",
+    icon: FaRegHeart,
+    href: "/myFavourites",
+  },
+  { id: 4, text: "Public Profile", icon: FiEye, href: "/public-profile" },
+  {
+    id: 5,
+    text: "Buy Discounted Packages",
+    icon: RiBillLine,
+    href: "/buy-discounted-packages",
+  },
+  {
+    id: 6,
+    text: "Bought Packages and Billing",
+    icon: CgCreditCard,
+    href: "/bought-billing-pacakages",
+  },
+  {
+    id: 7,
+    text: "Chat",
+    icon: IoChatbubbleOutline,
+    href: "/team",
+  },
+  {
+    id: 8,
+    text: "Notifications",
+    icon: IoMdNotificationsOutline,
+    href: "/team",
+  },
+  { id: 9, text: "Help", icon: MdHelpOutline, href: "/help" },
+  { id: 10, text: "Settings", icon: LuSettings, href: "/settings" },
 ];
