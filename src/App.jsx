@@ -12,7 +12,7 @@ import ProductDetail from "./pages/ProductDetail";
 import Home from "./pages/Home";
 import Login from "./pages/Authentication/Login";
 import "react-toastify/dist/ReactToastify.css";
-import EditProfile from "./components/EditProfile";
+import EditProfile from "./pages/EditProfile";
 
 const auth = getAuth(app);
 

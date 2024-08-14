@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Categories from "../Categories";
+import Categories from "../../components/Categories";
 import profileIcon from "/assets/icons/profile-icon.png";
 import { IoMdInformationCircleOutline } from "react-icons/io";
-import Footer from "../Footer";
+import Footer from "../../components/Footer";
 import { app } from "../../firebase/firebase";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 
