@@ -11,6 +11,7 @@ const SignupForm = () => {
         description="New to OLX? Create an account"
         showFields={true}
         route="/login"
+        routeEmail="/SignupEmail"
       />
     </>
   );

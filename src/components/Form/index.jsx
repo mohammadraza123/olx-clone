@@ -11,7 +11,7 @@ const googleProvider = new GoogleAuthProvider();
 
 const auth = getAuth(app);
 
-const Form = ({heading, title, title1, description, showFields, route}) => {
+const Form = ({heading, title, title1, description, showFields, route, routeEmail}) => {
   const joinWithGoogle = () => {
     signInWithPopup(auth, googleProvider);
   };
@@ -47,7 +47,7 @@ const Form = ({heading, title, title1, description, showFields, route}) => {
               <hr className="flex-grow border-zinc-200 dark:border-zinc-700" />
             </div>
             <Link
-              to="/SignupEmail"
+              to={routeEmail}
               className="inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium border hover:border-2 border-black text-[#002F34] text-lg h-10 px-4 py-5 w-full"
             >
               <div className="flex items-center justify-center">

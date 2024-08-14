@@ -7,12 +7,12 @@ import Navbar from "./components/Navbar";
 import Myfavourites from "./pages/MyFavourites";
 import SignupForm from "./pages/Authentication/SignupForm";
 import SigninEmail from "./pages/Authentication/SigninEmail";
-import SignupEmail from "./pages/Authentication/SignupEmail";
 import ProductDetail from "./pages/ProductDetail";
 import Home from "./pages/Home";
 import Login from "./pages/Authentication/Login";
 import "react-toastify/dist/ReactToastify.css";
 import EditProfile from "./pages/EditProfile";
+import SignupEmail from "./pages/Authentication/SigninEmail";
 
 const auth = getAuth(app);
 
