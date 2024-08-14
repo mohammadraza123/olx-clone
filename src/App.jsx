@@ -36,23 +36,8 @@ function App() {
       return (
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route
-            path="/login"
-            element={
-              <Login
-                heading="Login to your OLX account"
-                title="Login with Google"
-                title1="Login with Email"
-                description="New to OLX? Create an account"
-              />
-            }
-          />
-          <Route path="/signup" element={<SignupForm 
-          heading="Create a new Olx account"
-          title="Join with Google"
-          title1="Join with Email"
-          description="New to OLX? Create an account"
-          />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignupForm />} />
           <Route path="/SignupEmail" element={<SignupEmail />} />
           <Route path="/SigninEmail" element={<SigninEmail />} />
           <Route path="*" element={<Navigate to="/login" />} />
