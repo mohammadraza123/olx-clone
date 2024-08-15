@@ -1,7 +1,7 @@
 import React from "react";
 import UserForm from "../../components/UserForm";
 
-const SignupEmail = () => {
+const SigninEmail = () => {
   return (
     <>
       <UserForm heading="Sign In" showFields={false} signupLogic={false} />
@@ -9,4 +9,4 @@ const SignupEmail = () => {
   );
 };
 
-export default SignupEmail;
+export default SigninEmail;

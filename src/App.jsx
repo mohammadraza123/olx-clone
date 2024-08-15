@@ -6,13 +6,13 @@ import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import Myfavourites from "./pages/MyFavourites";
 import SignupForm from "./pages/Authentication/SignupForm";
-import SigninEmail from "./pages/Authentication/SigninEmail";
 import ProductDetail from "./pages/ProductDetail";
 import Home from "./pages/Home";
 import Login from "./pages/Authentication/Login";
 import "react-toastify/dist/ReactToastify.css";
 import EditProfile from "./pages/EditProfile";
-import SignupEmail from "./pages/Authentication/SigninEmail";
+import SigninEmail from "./pages/Authentication/SigninEmail";
+import SignupEmail from "./pages/Authentication/SignupEmail";
 
 const auth = getAuth(app);
 
@@ -38,8 +38,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignupForm />} />
-          <Route path="/SignupEmail" element={<SignupEmail />} />
           <Route path="/SigninEmail" element={<SigninEmail />} />
+          <Route path="/SignupEmail" element={<SignupEmail />} />
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
       );
