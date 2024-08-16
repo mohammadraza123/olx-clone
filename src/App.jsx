@@ -13,9 +13,9 @@ import Login from "./pages/Authentication/Login";
 import "react-toastify/dist/ReactToastify.css";
 import EditProfile from "./pages/EditProfile";
 import SignupEmail from "./pages/Authentication/SigninEmail";
+import CategoryPage from "./pages/CategoryPage"
 
 const auth = getAuth(app);
-
 function App() {
   const [user, setUser] = useState(null);
 
@@ -47,6 +47,7 @@ function App() {
       return (
         <>
           <Routes>
+          <Route path="/category" element={<CategoryPage />} />
             <Route path="/myFavourites" element={<Myfavourites />} />
             <Route path="/" element={<Home user={user} />} />
             <Route

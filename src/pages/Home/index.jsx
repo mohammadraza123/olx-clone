@@ -6,10 +6,12 @@ import Categories from "../../components/Categories";
 import AdvisorBanner from "../../components/AdvertiseBanner";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
+import { Link } from "react-router-dom";
 export default function Home({ user }) {
   return (
     <>
       {user == null && <Navbar />}
+      <Link to='/category'><button>category</button></Link>
       <Categories />
       <AdvisorBanner />
       <AllCategories />
