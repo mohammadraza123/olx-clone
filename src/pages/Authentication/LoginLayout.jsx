@@ -3,7 +3,7 @@ import Form from "../../components/Form";
 
 
 
-const Login = () => {
+const LoginLayout = () => {
  
   return (
     <>
@@ -20,4 +20,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginLayout;
