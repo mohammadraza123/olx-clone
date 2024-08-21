@@ -1,17 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { IoClose } from "react-icons/io5";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { getAuth } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { app } from "../../firebase/firebase";
 import { FcGoogle } from "react-icons/fc";
 import { MdEmail } from "react-icons/md";
 
 const googleProvider = new GoogleAuthProvider();
-
 const auth = getAuth(app);
 
-const Form = ({heading, title, title1, description, showFields, route, routeEmail}) => {
+const Form = ({
+  heading,
+  title,
+  title1,
+  description,
+  showFields,
+  route,
+  routeEmail,
+}) => {
   const joinWithGoogle = () => {
     signInWithPopup(auth, googleProvider);
   };
@@ -27,9 +33,7 @@ const Form = ({heading, title, title1, description, showFields, route, routeEmai
           </div>
           <div className="text-center pb-4">
             <h1 className="text-4xl font-extrabold mb-8 text-[#002F34]">Olx</h1>
-            <p className="text-[#002F34] font-semibold text-2xl">
-              {heading}
-            </p>
+            <p className="text-[#002F34] font-semibold text-2xl">{heading}</p>
           </div>
           <div className="space-y-4">
             <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium border hover:border-2 border-black text-[#002F34] text-lg h-10 px-4 py-5 w-full">
@@ -57,17 +61,18 @@ const Form = ({heading, title, title1, description, showFields, route, routeEmai
             </Link>
 
             <div className=" py-2">
-           {showFields &&   <p className="text-sm text-center pb-6">
-                When creating a new account you agree to{" "}
-                <b>
-                  <u> OLX's Terms and conditions </u>
-                </b>{" "}
-                and{" "}
-                <b>
-                  <u> Privacy Policy</u>{" "}
-                </b>
-              </p>
-            }
+              {showFields && (
+                <p className="text-sm text-center pb-6">
+                  When creating a new account you agree to{" "}
+                  <b>
+                    <u> OLX's Terms and conditions </u>
+                  </b>{" "}
+                  and{" "}
+                  <b>
+                    <u> Privacy Policy</u>{" "}
+                  </b>
+                </p>
+              )}
               <Link
                 to={route}
                 className="flex justify-center text-[#3A77FF] font-bold"
