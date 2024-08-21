@@ -9,8 +9,7 @@ import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { toast, ToastContainer } from "react-toastify";
 
 const UserForm = ({ heading, showFields, signupLogic }) => {
-  const [fname, setfName] = useState("");
-  const [lname, setlName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,13 +21,10 @@ const UserForm = ({ heading, showFields, signupLogic }) => {
 
     if (signupLogic) {
       // Signup Logic
-      if (!fname) {
-        toast.error("Enter your First Name");
+      if (!name) {
+        toast.error("Enter your Name");
         return;
-      } else if (!lname) {
-        toast.error("Enter your Last Name");
-        return;
-      }
+      } 
       try {
         const userCredential = await createUserWithEmailAndPassword(
           auth,
@@ -39,8 +35,7 @@ const UserForm = ({ heading, showFields, signupLogic }) => {
 
         // Add data in the firestore database with Authentication UID
         await setDoc(doc(firestore, "users", userId), {
-          firstName: fname,
-          lastName: lname,
+          name: name,
           email: email,
           password: password,
         });
@@ -69,22 +64,11 @@ const UserForm = ({ heading, showFields, signupLogic }) => {
             {showFields && (
               <div>
                 <div className="mb-4">
-                  <label className="block text-sm">First Name</label>
+                  <label className="block text-sm">Full Name</label>
                   <input
                     name="firstName"
-                    value={fname}
-                    onChange={(e) => setfName(e.target.value)}
-                    className="mt-1 px-3 py-2 border rounded-md focus:outline-none focus:border-indigo-500 w-full sm:text-sm"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700">
-                    Last Name
-                  </label>
-                  <input
-                    name="lastName"
-                    value={lname}
-                    onChange={(e) => setlName(e.target.value)}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     className="mt-1 px-3 py-2 border rounded-md focus:outline-none focus:border-indigo-500 w-full sm:text-sm"
                   />
                 </div>

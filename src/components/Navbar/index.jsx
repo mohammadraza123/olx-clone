@@ -57,7 +57,7 @@ export default function Navbar({ user }) {
         const userDoc = await getDoc(doc(firestore, "users", user.uid));
         if (userDoc.exists()) {
           const userData = userDoc.data();
-          setUsername(`${userData.firstName} ${userData.lastName}`);
+          setUsername(userData.name);
         }
       }
     };
@@ -351,9 +351,9 @@ export default function Navbar({ user }) {
                           </div>
                         </Link>
                       ))
-                    : navigation.map((item) => (
+                    : navigation.map((item, index) => (
                         <Link
-                          key={item.name}
+                          key={index}
                           to={item.to}
                           className={classNames(
                             item.current

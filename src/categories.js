@@ -262,3 +262,13 @@ export const menuMobileItems = [
   { id: 9, text: "Help", icon: MdHelpOutline, href: "/help" },
   { id: 10, text: "Settings", icon: LuSettings, href: "/settings" },
 ];
+
+export const items = [
+  { title: "Mobile Phones", apiCategory: "smartphones" },
+  { title: "Cars", apiCategory: "vehicle" },
+  { title: "Bikes & Motorcycle", apiCategory: "motorcycle" },
+  { title: "Home Decoration", apiCategory: "home-decoration" },
+  { title: "Mens Watches", apiCategory: "mens-watches" },
+  { title: "Laptops", apiCategory: "laptops" },
+  { title: "Mens Watches", apiCategory: "mens-watches" }
+];
