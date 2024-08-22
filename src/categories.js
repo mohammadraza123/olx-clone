@@ -122,71 +122,84 @@ export const allCategoriesWithImages = [
     id: 1,
     icon: "/assets/categories/category-1.png",
     title: "Mobiles",
+    apiCategory: "smartphones",
   },
   {
     id: 2,
     icon: "/assets/categories/category-2.png",
     title: "Vehicles",
+    apiCategory: "vehicle",
   },
   {
     id: 3,
     icon: "/assets/categories/category-3.png",
     title: "Property For Sale",
+    apiCategory: "home-decoration",
   },
   {
     id: 4,
     icon: "/assets/categories/category-4.png",
     title: "Property For Rent",
+    apiCategory: "home-decoration",
   },
   {
     id: 5,
     icon: "/assets/categories/category-5.png",
     title: "Electronics & Home Appliances",
+    apiCategory: "mens-watches",
   },
   {
     id: 6,
     icon: "/assets/categories/category-6.png",
     title: "Bikes",
+    apiCategory: "motorcycle",
   },
   {
     id: 7,
     icon: "/assets/categories/category-7.png",
     title: "Business, Industrial & Agriculture",
+    apiCategory: "laptops",
   },
   {
     id: 8,
     icon: "/assets/categories/category-8.png",
     title: "Services",
+    apiCategory: "laptops",
   },
   {
     id: 9,
     icon: "/assets/categories/category-9.png",
     title: "Jobs",
+    apiCategory: "laptops",
   },
   {
     id: 10,
     icon: "/assets/categories/category-10.png",
     title: "Animals",
+    apiCategory: "smartphones",
   },
   {
     id: 11,
     icon: "/assets/categories/category-11.png",
-    title: "Furniture & Home Decor",
+    title: "home-decoration",
   },
   {
     id: 12,
     icon: "/assets/categories/category-12.png",
     title: "Fashion & Beauty",
+    apiCategory: "home-decoration",
   },
   {
     id: 13,
     icon: "/assets/categories/category-13.png",
     title: "Books, Sports & Hobbies",
+    apiCategory: "vehicle",
   },
   {
     id: 14,
     icon: "/assets/categories/category-14.png",
     title: "Kids",
+    apiCategory: "vehicle",
   },
 ];
 
@@ -270,5 +283,4 @@ export const items = [
   { title: "Home Decoration", apiCategory: "home-decoration" },
   { title: "Mens Watches", apiCategory: "mens-watches" },
   { title: "Laptops", apiCategory: "laptops" },
-  { title: "Mens Watches", apiCategory: "mens-watches" }
 ];
