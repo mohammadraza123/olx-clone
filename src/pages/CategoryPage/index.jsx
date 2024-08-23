@@ -1,69 +1,52 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { FaRegHeart } from 'react-icons/fa';
 import { IoIosCall } from 'react-icons/io';
-import { IoChatbubbleEllipsesOutline   } from 'react-icons/io5';
+import { IoChatbubbleEllipsesOutline } from 'react-icons/io5';
 import { useParams } from 'react-router-dom';
-import { API_URL } from '../../services/helper';
+import { fetchApi } from '../../services/helper';
 
-const index = () => {
-
+const CategoryPage = () => {
   const { id } = useParams();
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetchApi()
+    fetchApi(id).then((products) => {
+      console.log('productsssss',products)
+      setData(products);
+    });
   }, [id]);
 
-  const fetchApi = () => {
-    const url = `${API_URL}category/${id}?limit=4`;
-    axios
-      .get(url)
-      .then((response) => {
-        setData(response.data.products);
-      })
-      .catch((err) => console.log(err));
-  };
-
-
   return (
- 
- <div className="max-w-7xl h-64 mx-36">
-
-  {data.map((item,index)=>(
-  <div className="flex border my-6 rounded-md">
-  <div className="w-[35%] h-full">
-    <img
-      src={item.thumbnail}
-      alt="mobile Image"
-      className='w-full h-full object-cover'
-    />
-  </div>
-  <div className="w-[65%] flex flex-col ml-5 justify-evenly">
-      <div className='flex justify-between'>
-    <p className="text-2xl font-bold">{item.price}</p>
-    <p className='text-2xl mr-5'><FaRegHeart/> </p>
-    </div>
-
-
-    <p className="text-xl">{item.title}</p>
-    <p className="text-sm text-gray-600">{item.description}</p>
-    <div className="flex gap-3 ">
-    <button className="flex items-center gap-2 border-2 rounded-md px-4 text-base border-gray-800 p-1 font-semibold">
-
-     <IoIosCall className='text-2xl'/> Call
-      </button>
-      <button className="flex items-center gap-2 border rounded-md px-4 text-base bg-gray-800 text-white p-1 font-semibold">
-       <IoChatbubbleEllipsesOutline   className='text-2xl'/>Chat
-      </button>
-    </div>
-  </div>
-</div>
-
-  ))
-        }
+    <div className="max-w-7xl mx-36">
+      {data.map((item, index) => (
+        <div key={index} className="flex  h-52  border shadow-md my-6 rounded-md">
+          <div className="w-[35%] h-full">
+            <img
+              src={item.thumbnail}
+              alt="Product Image"
+              className="w-full h-full object-contain"
+            />
+          </div>
+          <div className="w-[65%] flex flex-col ml-5 justify-evenly">
+            <div className='flex justify-between'>
+              <p className="text-2xl font-bold">{item.price}</p>
+              <p className='text-2xl mr-5'><FaRegHeart /> </p>
+            </div>
+            <p className="text-xl">{item.title}</p>
+            <p className="text-sm text-gray-600">{item.description}</p>
+            <div className="flex gap-3">
+              <button className="flex items-center gap-2 border-2 rounded-md px-4 text-base border-gray-800 p-1 font-semibold">
+                <IoIosCall className='text-2xl' /> Call
+              </button>
+              <button className="flex items-center gap-2 border rounded-md px-4 text-base bg-gray-800 text-white p-1 font-semibold">
+                <IoChatbubbleEllipsesOutline className='text-2xl' /> Chat
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   );
-}
+};
 
-export default index
+export default CategoryPage;

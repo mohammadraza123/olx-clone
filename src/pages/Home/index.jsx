@@ -7,6 +7,7 @@ import AdvisorBanner from "../../components/AdvertiseBanner";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import { items } from "../../categories";
+
 export default function Home({ user }) {
   return (
     <>

@@ -40,6 +40,7 @@ function App() {
           <Route path="/signup" element={<SignupLayout />} />
           <Route path="/SigninEmail" element={<SigninForm />} />
           <Route path="/SignupEmail" element={<SignupForm />} />
+          <Route path="/category/:id" element={<CategoryPage />} />
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
       );
@@ -47,7 +48,6 @@ function App() {
       return (
         <>
           <Routes>
-            <Route path="/category/:id" element={<CategoryPage />} />
             <Route path="/myFavourites" element={<Myfavourites />} />
             <Route path="/" element={<Home user={user} />} />
             <Route

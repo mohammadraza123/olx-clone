@@ -4,7 +4,7 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addItem, removeItem } from "../../redux/slices/favouritesItem";
-import { API_URL, getRandomDays } from "../../services/helper";
+import { API_URL, fetchApi, getRandomDays } from "../../services/helper";
 
 function ItemsCard(props) {
   const [data, setData] = useState([]);
@@ -12,24 +12,18 @@ function ItemsCard(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+const limit=4
+
   useEffect(() => {
-    // fetchApi(id);
-    fetchApi()
+    fetchApi(props.apiCategory, limit).then((products) => {
+      console.log(limit)
+      setData(products);
+    });
     initializeFavorites();
   }, [props.apiCategory]);
 
-  const fetchApi = () => {
-    const url = `${API_URL}category/${props.apiCategory}?limit=4`;
-    axios
-      .get(url)
-      .then((response) => {
-        setData(response.data.products);
-      })
-      .catch((err) => console.log(err));
-  };
-
   const initializeFavorites = () => {
-    const url = `${API_URL}category/${props.apiCategory}?limit=4`;
+    const url = `${API_URL}category/${props.apiCategory}?limit=${limit}`;
     axios.get(url)
       .then((res) => {
         const initialFavorites = {};
@@ -83,12 +77,12 @@ function ItemsCard(props) {
                 <div>
                   {favorites[item.id] ? (
                     <FaHeart
-                      className="w-full h-5 text-red-500"
+                      className="w-full h-5"
                       onClick={(e) => handleRemoveItems(e, item)}
                     />
                   ) : (
                     <FaRegHeart
-                      className="w-full h-5 text-gray-500"
+                      className="w-full h-5"
                       onClick={(e) => handleAddItems(e, item)}
                     />
                   )}
