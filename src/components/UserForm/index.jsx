@@ -66,7 +66,6 @@ const UserForm = ({ heading, showFields, signupLogic }) => {
                 <div className="mb-4">
                   <label className="block text-sm">Full Name</label>
                   <input
-                    name="firstName"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     className="mt-1 px-3 py-2 border rounded-md focus:outline-none focus:border-indigo-500 w-full sm:text-sm"

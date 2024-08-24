@@ -1,20 +1,37 @@
 import React, { useEffect, useState } from "react";
 import Categories from "../../components/Categories";
 import profileIcon from "/assets/icons/profile-icon.png";
+import { IoMdInformationCircleOutline } from "react-icons/io";
 import Footer from "../../components/Footer";
 import { app } from "../../firebase/firebase";
-import { IoMdInformationCircleOutline } from "react-icons/io";
 import { doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
-import { updateEmail } from "firebase/auth";
+import { Link, useNavigate } from "react-router-dom";
 
 const EditProfile = ({ user }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const firestore = getFirestore(app);
+  const navigation = useNavigate();
 
+  // Update User data from Firestore
+  const updateData = async () => {
+    const userRef = doc(firestore, "users", user.uid);
+    await updateDoc(userRef, {
+      name: name,
+      email: email,
+    })
+      .then(() => {
+        toast.success("Document successfully updated!");
+      })
+      .catch((error) => {
+        toast.error("Error updating document: ", error);
+      });
+  };
+
+  //Get User detail from Firestore
   useEffect(() => {
-    const fetchName = async (user) => {
+    const fetchName = async () => {
       if (user.displayName) {
         setEmail(user.email);
         setName(user.displayName);
@@ -22,48 +39,14 @@ const EditProfile = ({ user }) => {
         const userDoc = await getDoc(doc(firestore, "users", user.uid));
         if (userDoc.exists()) {
           const userData = userDoc.data();
-          setEmail(userData.email || user.email);
           setName(userData.name);
+          setEmail(userData.email);
         }
       }
     };
-    fetchName(user);
-  }, [user]);
+    fetchName();
+  }, [user, firestore]);
 
-  // // Update user data
-  // const updateData = async () => {
-  //   const userRef = doc(firestore, "users", user.uid);
-  //   try {
-  //     await updateDoc(userRef, {
-  //       name: name,
-  //       email: email,
-  //     });
-
-  //     toast.success("Successfully updated!");
-  //   } catch (error) {
-  //     toast.error("Error updating document: ", error);
-  //   }
-  // };
-  const updateData = async () => {
-    const userRef = doc(firestore, "users", user.uid);
-  
-    try {
-      // Update email in Firebase Authentication
-      if (email !== user.email) {
-        await updateEmail(user, email);
-      }
-  
-      // Update Firestore document with the new name and email
-      await updateDoc(userRef, {
-        name: name,
-        email: email,
-      });
-  
-      toast.success("Successfully updated!");
-    } catch (error) {
-      toast.error(`Error updating document: ${error.message}`);
-    }
-  };
   return (
     <>
       <Categories />
@@ -176,7 +159,9 @@ const EditProfile = ({ user }) => {
             </div>
           </div>
           <div className="flex justify-between py-6 items-center">
-            <p className="font-bold underline">Discard</p>
+            <Link to="/" className="font-bold underline">
+              Discard
+            </Link>
             <button
               className="border w-36 h-12 rounded bg-[#002f34] text-white"
               onClick={updateData}
