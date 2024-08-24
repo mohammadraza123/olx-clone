@@ -48,6 +48,8 @@ function App() {
       return (
         <>
           <Routes>
+          <Route path="/category/:id" element={<CategoryPage />} />
+
             <Route path="/myFavourites" element={<Myfavourites />} />
             <Route path="/" element={<Home user={user} />} />
             <Route
