@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addItem, removeItem } from "../../redux/slices/favouritesItem";
-import { API_URL, fetchApi, getRandomDays } from "../../services/helper";
+import { fetchApi, getRandomDays } from "../../services/helper";
 
 function ItemsCard(props) {
   const [data, setData] = useState([]);
@@ -12,28 +11,9 @@ function ItemsCard(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-const limit=4
-
   useEffect(() => {
-    fetchApi(props.apiCategory, limit).then((products) => {
-      console.log(limit)
-      setData(products);
-    });
-    initializeFavorites();
-  }, [props.apiCategory]);
-
-  const initializeFavorites = () => {
-    const url = `${API_URL}category/${props.apiCategory}?limit=${limit}`;
-    axios.get(url)
-      .then((res) => {
-        const initialFavorites = {};
-        res.data.products.forEach((item) => {
-          initialFavorites[item.id] = false;
-        });
-        setFavorites(initialFavorites);
-      })
-      .catch((err) => console.log('Error initializing favorites:', err));
-  };
+    fetchApi(props.apiCategory, setData); // Pass the category and setData function
+  }, []);
 
   const handleAddItems = (e, item) => {
     e.stopPropagation();

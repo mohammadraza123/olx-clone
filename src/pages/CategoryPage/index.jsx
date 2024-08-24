@@ -8,17 +8,17 @@ import { useDispatch } from 'react-redux';
 import { addItem, removeItem } from '../../redux/slices/favouritesItem';
 
 const CategoryPage = () => {
-  const { id } = useParams();
+  const {id } = useParams();
   const [data, setData] = useState([]);
   const [favorites, setFavorites] = useState({});
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
+ 
   useEffect(() => {
-    fetchApi(id).then((products) => {
-      setData(products);
-    });
-  }, [id]);
+    fetchApi(id, setData);
+    }, [id]);
+
 
   const handleAddItems = (e, item) => {
     e.stopPropagation();

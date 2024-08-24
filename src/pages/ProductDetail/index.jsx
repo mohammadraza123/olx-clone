@@ -8,7 +8,7 @@ import Footer from "../../components/Footer"
 import { API_URL, getRandomDays } from "../../services/helper";
 
 
-const ProductDetail = ({ user }) => {
+const ProductDetail = () => {
   const { id } = useParams();
   const [data, setData] = useState(null);
 

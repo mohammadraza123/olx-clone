@@ -52,6 +52,8 @@ function App() {
 
             <Route path="/myFavourites" element={<Myfavourites />} />
             <Route path="/" element={<Home user={user} />} />
+            <Route path="/category/:id" element={<CategoryPage />} />
+
             <Route
               path="/product/:id"
               element={<ProductDetail user={user} />}
