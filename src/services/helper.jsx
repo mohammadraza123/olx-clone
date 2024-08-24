@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export const API_URL = "https://dummyjson.com/products/";
 
@@ -7,13 +7,12 @@ export const getRandomDays = () => {
   return `${randomDays} days ago`;
 };
 
-export const fetchApi = (category,limit=20) => {
-  const url = `${API_URL}category/${category}?limit=${limit}`;
-
-  return axios
+export const fetchApi = (apiCategory, setData) => {
+  const url = `${API_URL}category/${apiCategory}`;
+  axios
     .get(url)
-    .then((response) => response.data.products)
-    .catch((err) => {
-      console.log(err);
-    });
+    .then((response) => {
+      setData(response.data.products); // Update the state with fetched data
+    })
+    .catch((err) => console.log(err));
 };

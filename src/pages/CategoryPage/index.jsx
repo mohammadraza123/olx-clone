@@ -6,15 +6,15 @@ import { useParams } from 'react-router-dom';
 import { fetchApi } from '../../services/helper';
 
 const CategoryPage = () => {
-  const { id } = useParams();
+  const {id } = useParams();
   const [data, setData] = useState([]);
 
+ 
   useEffect(() => {
-    fetchApi(id).then((products) => {
-      console.log('productsssss',products)
-      setData(products);
-    });
-  }, [id]);
+    fetchApi(id, setData);
+     // Pass the category and setData function
+    }, []);
+
 
   return (
     <div className="max-w-7xl mx-36">
