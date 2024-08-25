@@ -1,23 +1,24 @@
 import React from "react";
 import footerBanner from "/assets/icons/footer-banner.webp";
+import { useNavigate } from "react-router-dom";
 
 const sections = [
   {
     title: "Popular Categories",
     links: [
-      { name: "Cars", href: "#" },
-      { name: "Flats for rent", href: "#" },
-      { name: "Jobs", href: "#" },
-      { name: "Mobile Phones", href: "#" },
+      { name: "Cars", apicategory: "vehicle" },
+      { name: "Flats for rent", apicategory: "home-decoration" },
+      { name: "Jobs", apicategory: "laptops" },
+      { name: "Mobile Phones", apicategory: "smartphones" },
     ],
   },
   {
     title: "Trending Searches",
     links: [
-      { name: "Bikes", href: "#" },
-      { name: "Watches", href: "#" },
-      { name: "Books", href: "#" },
-      { name: "Dogs", href: "#" },
+      { name: "Bikes", apicategory: "vehicle" },
+      { name: "Watches", apicategory: "mens-watches" },
+      { name: "Books", apicategory: "laptops" },
+      { name: "Dogs", apicategory: "laptops" },
     ],
   },
   {
@@ -40,15 +41,15 @@ const sections = [
   },
 ];
 
-const Section = ({ title, links }) => (
+const Section = ({ title, links, navigate }) => (
   <div>
     <h4 className="font-bold mb-4">{title}</h4>
     <ul>
       {links.map((link, index) => (
         <li key={index}>
           <a
-            href={link.href}
-            className=" text-sm text-gray-400 hover:text-black"
+            onClick={() => navigate(`/category/${link.apicategory}`)}
+            className=" text-sm text-gray-400 hover:text-black cursor-pointer"
           >
             {link.name}
           </a>
@@ -59,6 +60,7 @@ const Section = ({ title, links }) => (
 );
 
 function Footer() {
+  const navigate = useNavigate();
   return (
     <>
       <div className="mx-auto mt-8 sm:px-6 lg:px-8 block md:flex items-center justify-center gap-3 bg-[#f8faf9]">
@@ -78,6 +80,7 @@ function Footer() {
                 key={index}
                 title={section.title}
                 links={section.links}
+                navigate={navigate}
               />
             ))}
           </div>

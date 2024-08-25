@@ -13,32 +13,32 @@ export const categories = [
   {
     id: 1,
     title: "Mobile Phones",
-    path: "",
+    apicategory: "smartphones",
   },
   {
     id: 2,
     title: "Cars",
-    path: "",
+    apicategory: "vehicle",
   },
   {
     id: 3,
     title: "Motercycles",
-    path: "",
+    apicategory: "motorcycle",
   },
   {
     id: 4,
     title: "Houses",
-    path: "",
+    apicategory: "home-decoration",
   },
   {
     id: 5,
     title: "Audio-Videos",
-    path: "",
+    apicategory: "laptops",
   },
   {
     id: 6,
     title: "Tablets",
-    path: "",
+    apicategory: "tablets",
   },
 ];
 

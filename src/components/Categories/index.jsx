@@ -2,8 +2,11 @@ import React from "react";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { GoChevronDown } from "react-icons/go";
 import { categories, dropdowncategories } from "../../categories";
+import { useNavigate } from "react-router-dom";
 
 export default function Categories() {
+  const naviagte = useNavigate();
+
   return (
     <div className="hidden pt-3 mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 md:flex z-20 ">
       <Menu as="div" className="relative inline-block">
@@ -41,7 +44,11 @@ export default function Categories() {
       </Menu>
       <div className="flex gap-4 items-center cursor-pointer">
         {categories.map((item) => (
-          <h2 key={item.id} className="hover:text-[#69c3ce]">
+          <h2
+            key={item.id}
+            className="hover:text-[#69c3ce]"
+            onClick={() => naviagte(`/category/${item.apicategory}`)}
+          >
             {item.title}
           </h2>
         ))}
