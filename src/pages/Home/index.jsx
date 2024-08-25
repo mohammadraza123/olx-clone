@@ -11,7 +11,7 @@ import { items } from "../../categories";
 export default function Home({ user }) {
   return (
     <>
-      {user == null && <Navbar />}
+      {/* {user == null && <Navbar />} */}
       <Categories />
       <AdvisorBanner />
       <AllCategories />
@@ -20,7 +20,6 @@ export default function Home({ user }) {
           <ItemsCard title={item.title} apiCategory={item.apiCategory} />
         </div>
       ))}
-      <Footer />
       <ScrollToTop
         className="h-5 bg-white border-2 rounded-3xl flex pt-2 justify-center mr-6 "
         smooth

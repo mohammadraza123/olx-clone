@@ -10,10 +10,12 @@ import Myfavourites from "./pages/MyFavourites";
 import ProductDetail from "./pages/ProductDetail";
 import EditProfile from "./pages/EditProfile";
 import CategoryPage from "./pages/CategoryPage";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { app } from "./firebase/firebase";
 import "react-toastify/dist/ReactToastify.css";
+import ProtectedRoute from "./components/ProtectedRoutes";
+import Footer from "./components/Footer";
 
 const auth = getAuth(app);
 function App() {
@@ -31,49 +33,57 @@ function App() {
     });
   }, []);
 
-  const renderRoutes = () => {
-    if (user === null) {
-      return (
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<LoginLayout />} />
-          <Route path="/signup" element={<SignupLayout />} />
-          <Route path="/SigninEmail" element={<SigninForm />} />
-          <Route path="/SignupEmail" element={<SignupForm />} />
-          <Route path="/category/:id" element={<CategoryPage />} />
-          <Route path="*" element={<Navigate to="/login" />} />
-        </Routes>
-      );
-    } else {
-      return (
-        <>
-          <Routes>
-          <Route path="/category/:id" element={<CategoryPage />} />
-
-            <Route path="/myFavourites" element={<Myfavourites />} />
-            <Route path="/" element={<Home user={user} />} />
-            <Route path="/category/:id" element={<CategoryPage />} />
-
-            <Route
-              path="/product/:id"
-              element={<ProductDetail user={user} />}
-            />
-            <Route path="/myFavourites" element={<Myfavourites />} />
-            <Route
-              path="/editProfile/info"
-              element={<EditProfile user={user} />}
-            />
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
-        </>
-      );
-    }
-  };
-
   return (
     <>
-      {user !== null && <Navbar user={user} />}
-      {renderRoutes()}
+      <Navbar user={user} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<LoginLayout />} />
+        <Route path="/signup" element={<SignupLayout />} />
+        <Route path="/SigninEmail" element={<SigninForm />} />
+        <Route path="/SignupEmail" element={<SignupForm />} />
+        <Route
+          path="/product/:id"
+          element={
+            <ProtectedRoute user={user}>
+              <ProductDetail />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/category/:id"
+          element={
+            <ProtectedRoute user={user}>
+              <CategoryPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/myFavourites"
+          element={
+            <ProtectedRoute user={user}>
+              <Myfavourites />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/category/:id"
+          element={
+            <ProtectedRoute user={user}>
+              <CategoryPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/editProfile/info"
+          element={
+            <ProtectedRoute user={user}>
+              <EditProfile user={user} />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+      <Footer />
     </>
   );
 }
