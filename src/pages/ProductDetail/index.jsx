@@ -4,7 +4,6 @@ import axios from "axios";
 import { FaRegHeart } from "react-icons/fa";
 import Slider from "../../components/Slider";
 import Categories from "../../components/Categories";
-import Footer from "../../components/Footer"
 import { API_URL, getRandomDays } from "../../services/helper";
 
 
@@ -81,7 +80,6 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

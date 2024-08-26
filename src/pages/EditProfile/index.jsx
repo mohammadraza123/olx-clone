@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Categories from "../../components/Categories";
 import profileIcon from "/assets/icons/profile-icon.png";
 import { IoMdInformationCircleOutline } from "react-icons/io";
-import Footer from "../../components/Footer";
 import { app } from "../../firebase/firebase";
 import { doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
@@ -183,7 +182,6 @@ const EditProfile = ({ user }) => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

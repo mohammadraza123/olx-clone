@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import Home from "./pages/Home";
-import Navbar from "./components/Navbar";
 import LoginLayout from "./pages/Authentication/LoginLayout";
 import SignupLayout from "./pages/Authentication/SignupLayout";
 import SigninForm from "./pages/Authentication/SigninForm";
@@ -15,7 +14,6 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { app } from "./firebase/firebase";
 import "react-toastify/dist/ReactToastify.css";
 import ProtectedRoute from "./components/ProtectedRoutes";
-import Footer from "./components/Footer";
 
 const auth = getAuth(app);
 function App() {
@@ -35,7 +33,6 @@ function App() {
 
   return (
     <>
-      <Navbar user={user} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginLayout />} />
@@ -83,7 +80,6 @@ function App() {
           }
         />
       </Routes>
-      <Footer />
     </>
   );
 }
