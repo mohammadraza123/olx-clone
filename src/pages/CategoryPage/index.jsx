@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { fetchApi } from '../../services/helper';
 import { useDispatch } from 'react-redux';
 import { addItem, removeItem } from '../../redux/slices/favouritesItem';
+import PageWrapper from '../../components/PageWrapper';
 
 const CategoryPage = () => {
   const {id } = useParams();
@@ -39,11 +40,12 @@ const CategoryPage = () => {
   };
 
   return (
+    <PageWrapper>
     <div className="max-w-7xl mx-36">
       {data.map((item, index) => (
         <div
           key={index}
-          className="flex  h-52  border shadow-md my-6 rounded-md"
+          className="flex  h-52  border shadow-md my-6 rounded-md cursor-pointer"
            onClick={() => navigate(`/product/${item.id}`)}
         >
           <div className="w-[35%] h-full">
@@ -84,6 +86,7 @@ const CategoryPage = () => {
         </div>
       ))}
     </div>
+    </PageWrapper>
   );
 };
 
