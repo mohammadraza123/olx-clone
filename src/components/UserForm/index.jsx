@@ -7,6 +7,7 @@ import {
 import { app } from "../../firebase/firebase";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { toast, ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const UserForm = ({ heading, showFields, signupLogic }) => {
   const [name, setName] = useState("");
@@ -15,6 +16,7 @@ const UserForm = ({ heading, showFields, signupLogic }) => {
 
   const auth = getAuth(app);
   const firestore = getFirestore(app);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +26,7 @@ const UserForm = ({ heading, showFields, signupLogic }) => {
       if (!name) {
         toast.error("Enter your Name");
         return;
-      } 
+      }
       try {
         const userCredential = await createUserWithEmailAndPassword(
           auth,
@@ -40,6 +42,7 @@ const UserForm = ({ heading, showFields, signupLogic }) => {
           password: password,
         });
         toast.success("Successfully signed up");
+        navigate("/login");
       } catch (error) {
         console.error("Error signing up:", error);
         toast.error(error.message);
@@ -49,6 +52,7 @@ const UserForm = ({ heading, showFields, signupLogic }) => {
       try {
         await signInWithEmailAndPassword(auth, email, password);
         toast.success("Successfully logged in");
+        navigate("/");
       } catch (error) {
         toast.error(error.message);
       }

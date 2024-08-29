@@ -5,7 +5,7 @@ import LoginLayout from "./pages/Authentication/LoginLayout";
 import SignupLayout from "./pages/Authentication/SignupLayout";
 import SigninForm from "./pages/Authentication/SigninForm";
 import SignupForm from "./pages/Authentication/SignupForm";
-import Myfavourites from "./pages/MyFavourites";
+import MyFavourites from "./pages/MyFavourites";
 import ProductDetail from "./pages/ProductDetail";
 import EditProfile from "./pages/EditProfile";
 import CategoryPage from "./pages/CategoryPage";
@@ -39,46 +39,14 @@ function App() {
         <Route path="/signup" element={<SignupLayout />} />
         <Route path="/SigninEmail" element={<SigninForm />} />
         <Route path="/SignupEmail" element={<SignupForm />} />
-        <Route
-          path="/product/:id"
-          element={
-            <ProtectedRoute user={user}>
-              <ProductDetail />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/category/:id"
-          element={
-            <ProtectedRoute user={user}>
-              <CategoryPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/myFavourites"
-          element={
-            <ProtectedRoute user={user}>
-              <Myfavourites />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/category/:id"
-          element={
-            <ProtectedRoute user={user}>
-              <CategoryPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/editProfile/info"
-          element={
-            <ProtectedRoute user={user}>
-              <EditProfile user={user} />
-            </ProtectedRoute>
-          }
-        />
+
+        {/* Protected Routes */}
+        <Route element={<ProtectedRoute user={user} />}>
+          <Route path="/myFavourites" element={<MyFavourites />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/editProfile/info" element={<EditProfile />} />
+          <Route path="/category/:id" element={<CategoryPage />} />
+        </Route>
       </Routes>
     </>
   );
