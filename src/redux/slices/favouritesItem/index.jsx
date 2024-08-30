@@ -16,9 +16,7 @@ export const favouritesSlice = createSlice({
       }
      
     },
-    setItems: (state, action) => {
-      state.wishList = action.payload;
-    },
+
     removeItem: (state, action) => {
       state.wishList = state.wishList.filter(
         (item) => item.id !== action.payload.id
@@ -27,6 +25,6 @@ export const favouritesSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem, setItems } = favouritesSlice.actions;
+export const { addItem, removeItem} = favouritesSlice.actions;
 
 export default favouritesSlice.reducer

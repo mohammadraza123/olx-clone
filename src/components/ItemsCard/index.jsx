@@ -12,7 +12,7 @@ function ItemsCard(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchApi(props.apiCategory, setData); // Pass the category and setData function
+    fetchApi(props.apiCategory, setData);
   }, []);
 
   const handleAddItems = (e, item) => {

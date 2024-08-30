@@ -13,6 +13,7 @@ export const fetchApi = async(category, setData) => {
   try {
     await axios.get(url).then((response) => {
       setData(response.data.products);
+      console.log("responseeee: ",response.data.products.length)
     });
   } catch (error) {
     console.log(error);

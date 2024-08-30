@@ -2,7 +2,7 @@ import React, { useEffect} from 'react';
 import { FaHeart } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { removeItem, setItems } from '../../redux/slices/favouritesItem';
+import { removeItem } from '../../redux/slices/favouritesItem';
 import { getRandomDays } from '../../services/helper';
 import PageWrapper from '../../components/PageWrapper';
 import Categories from '../../components/Categories';
@@ -17,14 +17,6 @@ const MyFavourites = () => {
     e.stopPropagation();
     dispatch(removeItem(item));
   };
-
-  useEffect(() => {
-    const data = localStorage.getItem('key');
-    if (data) {
-      dispatch(setItems(JSON.parse(data)));
-    }
-  }, [dispatch]);
-
 
   useEffect(()=>{
     localStorage.setItem('key', JSON.stringify(cart))
