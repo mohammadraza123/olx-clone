@@ -18,6 +18,7 @@ import ProtectedRoute from "./components/ProtectedRoutes";
 const auth = getAuth(app);
 function App() {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -28,8 +29,17 @@ function App() {
         console.log("You are logged out", user);
         setUser(null);
       }
+      setLoading(false);
     });
   }, []);
+
+  if (loading) {
+    return (
+      <div className="flex min-h-screen justify-center items-center">
+        Loading...
+      </div>
+    );
+  }
 
   return (
     <>

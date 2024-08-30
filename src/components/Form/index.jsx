@@ -1,13 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoClose } from "react-icons/io5";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { app } from "../../firebase/firebase";
 import { FcGoogle } from "react-icons/fc";
 import { MdEmail } from "react-icons/md";
-
-const googleProvider = new GoogleAuthProvider();
-const auth = getAuth(app);
 
 const Form = ({
   heading,
@@ -18,8 +15,17 @@ const Form = ({
   route,
   routeEmail,
 }) => {
-  const joinWithGoogle = () => {
-    signInWithPopup(auth, googleProvider);
+  const googleProvider = new GoogleAuthProvider();
+  const auth = getAuth(app);
+  const navigate = useNavigate();
+
+  const joinWithGoogle = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider);
+      navigate("/");
+    } catch (error) {
+      console.error("Error signing in with Google:", error);
+    }
   };
 
   return (
