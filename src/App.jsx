@@ -14,6 +14,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { app } from "./firebase/firebase";
 import "react-toastify/dist/ReactToastify.css";
 import ProtectedRoute from "./components/ProtectedRoutes";
+import Loader from "./components/Loader";
 
 const auth = getAuth(app);
 function App() {
@@ -36,7 +37,7 @@ function App() {
   if (loading) {
     return (
       <div className="flex min-h-screen justify-center items-center">
-        Loading...
+        <Loader />
       </div>
     );
   }
