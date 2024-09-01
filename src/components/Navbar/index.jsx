@@ -16,7 +16,6 @@ import { Link } from "react-router-dom";
 import { app } from "../../firebase/firebase";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { getFirestore, getDoc, doc } from "firebase/firestore";
-import { ToastContainer, toast } from "react-toastify";
 import { CiCamera } from "react-icons/ci";
 import { BsChat } from "react-icons/bs";
 import { IoMdHelpCircleOutline } from "react-icons/io";
@@ -65,7 +64,6 @@ export default function Navbar({ user }) {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         fetchUsername(user);
-        toast.success("Successfully Login");
       } else {
         setUsername(""); // Clear username if not authenticated
       }
@@ -398,7 +396,6 @@ export default function Navbar({ user }) {
           </>
         )}
       </Disclosure>
-      <ToastContainer />
     </>
   );
 }

@@ -5,6 +5,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { app } from "../../firebase/firebase";
 import { FcGoogle } from "react-icons/fc";
 import { MdEmail } from "react-icons/md";
+import { toast } from "react-toastify";
 
 const Form = ({
   heading,
@@ -23,6 +24,7 @@ const Form = ({
     try {
       await signInWithPopup(auth, googleProvider);
       navigate("/");
+      toast.success("Successfully logged in");
     } catch (error) {
       console.error("Error signing in with Google:", error);
     }

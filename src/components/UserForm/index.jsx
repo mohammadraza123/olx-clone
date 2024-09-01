@@ -6,7 +6,7 @@ import {
 } from "firebase/auth";
 import { app } from "../../firebase/firebase";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const UserForm = ({ heading, showFields, signupLogic }) => {
@@ -41,7 +41,6 @@ const UserForm = ({ heading, showFields, signupLogic }) => {
           email: email,
           password: password,
         });
-        toast.success("Successfully signed up");
         navigate("/login");
       } catch (error) {
         console.error("Error signing up:", error);
@@ -51,8 +50,8 @@ const UserForm = ({ heading, showFields, signupLogic }) => {
       // Signin Logic
       try {
         await signInWithEmailAndPassword(auth, email, password);
-        toast.success("Successfully logged in");
         navigate("/");
+        toast.success("Successfully logged in");
       } catch (error) {
         toast.error(error.message);
       }
@@ -110,7 +109,6 @@ const UserForm = ({ heading, showFields, signupLogic }) => {
           </form>
         </div>
       </div>
-      <ToastContainer />
     </>
   );
 };

@@ -15,9 +15,11 @@ import { app } from "./firebase/firebase";
 import "react-toastify/dist/ReactToastify.css";
 import ProtectedRoute from "./components/ProtectedRoutes";
 import Loader from "./components/Loader";
+import ScrollToTop from "react-scroll-to-top";
+import { ToastContainer } from "react-toastify";
 
-const auth = getAuth(app);
 function App() {
+  const auth = getAuth(app);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -55,10 +57,29 @@ function App() {
         <Route element={<ProtectedRoute user={user} />}>
           <Route path="/myFavourites" element={<MyFavourites />} />
           <Route path="/product/:id" element={<ProductDetail />} />
-          <Route path="/editProfile/info" element={<EditProfile />} />
+          <Route
+            path="/editProfile/info"
+            element={<EditProfile user={user} />}
+          />
           <Route path="/category/:id" element={<CategoryPage />} />
         </Route>
       </Routes>
+
+      <ScrollToTop
+        className="h-5 bg-white border-2 rounded-3xl flex pt-2 justify-center mr-6 "
+        smooth
+        height="20"
+        style={{
+          backgroundColor: "white",
+          border: "2px solid skyBlue",
+          borderRadius: "25px",
+          display: "flex",
+          paddingTop: "8px",
+          justifyContent: "center",
+          marginRight: "-26px",
+        }}
+      />
+      <ToastContainer />
     </>
   );
 }

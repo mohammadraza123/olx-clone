@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import Navbar from '../Navbar';
-import Footer from '../Footer';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { app } from '../../firebase/firebase';
-
+import React, { useEffect, useState } from "react";
+import Navbar from "../Navbar";
+import Footer from "../Footer";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { app } from "../../firebase/firebase";
 
 const auth = getAuth(app);
 
-const PageWrapper = ({children}) => {
-
+const PageWrapper = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -25,11 +23,11 @@ const PageWrapper = ({children}) => {
 
   return (
     <>
-      <Navbar user={user}/>
+      <Navbar user={user} />
       <main>{children}</main>
       <Footer />
     </>
   );
-}
+};
 
 export default PageWrapper;
