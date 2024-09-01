@@ -29,10 +29,8 @@ const CategoryPage = () => {
         await axios
           .get(`${API_URL}category/${id}?limit=4&skip=${page}`)
           .then((response) => {
-            setTimeout(() => {
-              setData(response.data.products)
-              setLoading(false)
-            },3000);
+            setData(response.data);
+            setLoading(false)
           });
       } catch (err) {
         console.log("error:", err);
@@ -46,6 +44,9 @@ const CategoryPage = () => {
       setLoading(false);
     }
   }, [id, page]);
+
+console.log("total", data.total);
+
 
   const handleAddItems = (e, item) => {
     e.stopPropagation();
@@ -74,7 +75,7 @@ const CategoryPage = () => {
         </div>
       ) : (
         <div className="w-full md:max-w-7xl mx-5 md:mx-36">
-          {data.map((item, index) => (
+          {data.products.map((item, index) => (
             <div
               key={index}
               className="flex  h-52  border shadow-md my-6 rounded-md cursor-pointer"
@@ -121,7 +122,7 @@ const CategoryPage = () => {
           ))}
         </div>
       )}
-      <Pagination page={page} setPage={setPage} />
+      <Pagination page={page} setPage={setPage} data={data} />
     </PageWrapper>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { allCategoriesWithImages } from "../../categories";
 import { useNavigate } from "react-router-dom";
+import { allCategoriesWithImages } from "../../common/categories";
 
 export default function AllCategories() {
 

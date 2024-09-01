@@ -11,7 +11,7 @@ import { FaSearch } from "react-icons/fa";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { IoChevronDown, IoDocumentTextOutline } from "react-icons/io5";
 import { MdLogout } from "react-icons/md";
-import { menuItems, menuMobileItems } from "../../categories";
+import { menuItems, menuMobileItems } from "../../common/categories";
 import { Link } from "react-router-dom";
 import { app } from "../../firebase/firebase";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";

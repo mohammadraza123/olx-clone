@@ -1,8 +1,8 @@
 import React from "react";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { GoChevronDown } from "react-icons/go";
-import { categories, dropdowncategories } from "../../categories";
 import { useNavigate } from "react-router-dom";
+import { categories, dropdowncategories } from "../../common/categories";
 
 export default function Categories() {
   const naviagte = useNavigate();

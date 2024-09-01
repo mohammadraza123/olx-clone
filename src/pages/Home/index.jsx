@@ -4,8 +4,8 @@ import ItemsCard from "../../components/ItemsCard";
 import ScrollToTop from "react-scroll-to-top";
 import Categories from "../../components/Categories";
 import AdvisorBanner from "../../components/AdvertiseBanner";
-import { items } from "../../categories";
 import PageWrapper from "../../components/PageWrapper";
+import { items } from "../../common/categories";
 
 export default function Home() {
   return (
