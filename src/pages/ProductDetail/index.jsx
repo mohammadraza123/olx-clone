@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { FaRegHeart } from "react-icons/fa";
 import Slider from "../../components/Slider";
 import Categories from "../../components/Categories";
-import { API_URL, getRandomDays } from "../../services/helper";
+import { API_URL } from "../../services/helper";
 import PageWrapper from "../../components/PageWrapper";
-
+import Loader from "../../components/Loader";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -25,10 +25,17 @@ const ProductDetail = () => {
     fetchApi();
   }, [id]);
 
+  const getRandomDays = useMemo(() => {
+    const randomDays = Math.floor(Math.random() * 30 + 1);
+    return `${randomDays} days ago`;
+  }, []);
+
   if (!data) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <p className="text-lg font-medium">Loading...</p>
+        <p className="text-lg font-medium">
+          <Loader />
+        </p>
       </div>
     );
   }
@@ -48,7 +55,7 @@ const ProductDetail = () => {
             </div>
             <div className="pt-4 flex flex-row items-center justify-between">
               <h1 className="text-xl font-semibold">{data.title}</h1>
-              <p>{getRandomDays()}</p>
+              <p>{getRandomDays}</p>
             </div>
           </div>
 

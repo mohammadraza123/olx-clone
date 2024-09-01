@@ -265,13 +265,13 @@ export default function Navbar({ user }) {
                             </div>
                           </MenuItem>
                           <MenuItem>
-                              <Link to= 'editProfile/info'>
-                            <div className="flex justify-center py-3 px-4 border-b w-full">
-                              <button className="border-2 border-black py-2 px-2 rounded-md w-full">
-                                View and edit your profile
-                              </button>
-                            </div>
-                              </Link>
+                            <Link to="editProfile/info">
+                              <div className="flex justify-center py-3 px-4 border-b w-full">
+                                <button className="border-2 border-black py-2 px-2 rounded-md w-full">
+                                  View and edit your profile
+                                </button>
+                              </div>
+                            </Link>
                           </MenuItem>
                           {menuItems.map((item, index) => (
                             <MenuItem key={index}>
@@ -341,7 +341,7 @@ export default function Navbar({ user }) {
                 <div>
                   {user
                     ? menuMobileItems.map((item) => (
-                        <Link to={item.href}>
+                        <Link to={item.href} key={item.id}>
                           <div
                             key={item.id}
                             className="flex items-center gap-5 hover:bg-[#d3fcfc] rounded-md px-3 py-2 text-base font-medium"

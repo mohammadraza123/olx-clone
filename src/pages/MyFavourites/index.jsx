@@ -1,26 +1,31 @@
-import React, { useEffect} from 'react';
-import { FaHeart } from 'react-icons/fa';
-import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { removeItem } from '../../redux/slices/favouritesItem';
-import { getRandomDays } from '../../services/helper';
-import PageWrapper from '../../components/PageWrapper';
-import Categories from '../../components/Categories';
+import React, { useEffect, useMemo } from "react";
+import { FaHeart } from "react-icons/fa";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { removeItem } from "../../redux/slices/favouritesItem";
+import PageWrapper from "../../components/PageWrapper";
+import Categories from "../../components/Categories";
 
 const MyFavourites = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector((state) => state.favourites.wishList);
 
-
   const handleRemoveItems = (e, item) => {
     e.stopPropagation();
     dispatch(removeItem(item));
   };
 
-  useEffect(()=>{
-    localStorage.setItem('key', JSON.stringify(cart))
-  },[cart])
+  useEffect(() => {
+    localStorage.setItem("key", JSON.stringify(cart));
+  }, [cart]);
+
+  const getRandomDays = useMemo(() => {
+    return cart.map(() => {
+      const randomDays = Math.floor(Math.random() * 30 + 1);
+      return `${randomDays} days ago`;
+    });
+  }, []);
 
   return (
     <>
@@ -52,7 +57,9 @@ const MyFavourites = () => {
                 <div className="px-4">
                   <p className="text-gray-700 text-base">{item.title}</p>
                   <p className="text-gray-700 text-base">{item.returnPolicy}</p>
-                  <p className="text-gray-700 text-base">{getRandomDays()}</p>
+                  <p className="text-gray-700 text-base">
+                    {getRandomDays[index]}
+                  </p>
                 </div>
               </div>
             ))}

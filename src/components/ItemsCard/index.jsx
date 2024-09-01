@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addItem, removeItem } from "../../redux/slices/favouritesItem";
-import { fetchApi, getRandomDays } from "../../services/helper";
+import { fetchApi } from "../../services/helper";
 
 function ItemsCard(props) {
   const [data, setData] = useState([]);
@@ -13,7 +13,14 @@ function ItemsCard(props) {
 
   useEffect(() => {
     fetchApi(props.apiCategory, setData);
-  }, []);
+  }, [props.apiCategory]);
+
+  const getRandomDays = useMemo(() => {
+    return data.map(() => {
+      const randomDays = Math.floor(Math.random() * 30 + 1);
+      return `${randomDays} days ago`;
+    });
+  }, [data]);
 
   const handleAddItems = (e, item) => {
     e.stopPropagation();
@@ -78,7 +85,7 @@ function ItemsCard(props) {
                   {item.returnPolicy}
                 </p>
                 <p className="text-gray-700 text-sm sm:text-base">
-                  {getRandomDays()}
+                  {getRandomDays[index]}
                 </p>
               </div>
             </div>
