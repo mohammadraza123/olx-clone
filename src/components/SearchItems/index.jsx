@@ -27,7 +27,9 @@ const SearchInput = () => {
     <PageWrapper>
       <div className="w-full md:max-w-7xl mx-5 md:mx-36">
         {data
-          //   .filter((item) => item.includes(search))
+          .filter((item) =>
+            item.title.toLowerCase().includes(search.toLowerCase())
+          )
           .map((item, index) => (
             <div
               key={index}
