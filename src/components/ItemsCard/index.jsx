@@ -10,6 +10,7 @@ function ItemsCard(props) {
   const [favorites, setFavorites ] = useState({});
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  
 
   useEffect(() => {
     fetchApi(props.apiCategory,setData);
