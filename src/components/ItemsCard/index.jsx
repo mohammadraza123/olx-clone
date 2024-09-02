@@ -7,7 +7,7 @@ import { fetchApi, getRandomDays } from "../../services/helper";
 
 function ItemsCard(props) {
   const [data, setData] = useState([]);
-  const [favorites, setFavorites] = useState({});
+  const [favorites, setFavorites ] = useState({});
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
