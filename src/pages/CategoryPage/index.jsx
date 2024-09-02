@@ -15,8 +15,7 @@ const CategoryPage = () => {
 
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
-
-  const {id } = useParams();
+  const { id } = useParams();
   const [data, setData] = useState([]);
   const [favorites, setFavorites] = useState({});
   const dispatch = useDispatch();
@@ -30,7 +29,7 @@ const CategoryPage = () => {
           .get(`${API_URL}category/${id}?limit=4&skip=${page}`)
           .then((response) => {
             setData(response.data);
-            setLoading(false)
+            setLoading(false);
           });
       } catch (err) {
         console.log("error:", err);
@@ -39,14 +38,13 @@ const CategoryPage = () => {
     };
     fetchData();
 
-    //return a cleanUp function
+    // Clean-up function
     return () => {
       setLoading(false);
-    }
+    };
   }, [id, page]);
 
-console.log("total", data.total);
-
+  console.log("total", data.total);
 
   const handleAddItems = (e, item) => {
     e.stopPropagation();
@@ -70,49 +68,42 @@ console.log("total", data.total);
     <PageWrapper>
       {loading ? (
         <div className="flex min-h-screen justify-center items-center">
-                 <Loader />
-
+          <Loader />
         </div>
       ) : (
-        <div className="w-full md:max-w-7xl mx-5 md:mx-36">
+        <div className="w-full px-4 sm:px-6 lg:px-8 mx-auto md:max-w-7xl">
           {data.products.map((item, index) => (
             <div
               key={index}
-              className="flex  h-52  border shadow-md my-6 rounded-md cursor-pointer"
+              className="flex flex-col md:flex-row h-auto md:h-52 border shadow-md my-6 rounded-md cursor-pointer transition-transform transform hover:scale-105"
               onClick={() => navigate(`/product/${item.id}`)}
             >
-              <div className="w-[35%] h-full">
+              <div className="w-full md:w-[35%] h-52 md:h-full overflow-hidden">
                 <img
                   src={item.thumbnail}
                   alt="Product Image"
                   className="w-full h-full object-cover md:object-contain"
                 />
               </div>
-              <div className="w-[65%] flex flex-col ml-5 justify-evenly">
-                <div className="flex justify-between">
-                  <p className="text-lg md:text-2xl font-bold">{item.price}</p>
-                  <p className="text-2xl mr-5">
+              <div className="w-full md:w-[65%] flex flex-col p-4 md:p-5 justify-between">
+                <div className="flex justify-between items-center">
+                  <p className="text-lg md:text-2xl font-bold">${item.price}</p>
+                  <button onClick={(e) => favorites[item.id] ? handleRemoveItems(e, item) : handleAddItems(e, item)} className="text-2xl">
                     {favorites[item.id] ? (
-                      <FaHeart
-                        className="w-full h-5"
-                        onClick={(e) => handleRemoveItems(e, item)}
-                      />
+                      <FaHeart />
                     ) : (
-                      <FaRegHeart
-                        className="w-full h-5"
-                        onClick={(e) => handleAddItems(e, item)}
-                      />
+                      <FaRegHeart />
                     )}
-                  </p>
+                  </button>
                 </div>
-                <p className="text-base md:text-xl">{item.title}</p>
-                <p className="text-sm text-gray-600">{item.description}</p>
-                <div className="flex gap-3 justify-center md:justify-start">
-                  <button className="flex items-center  gap-2 border-2 rounded-md px-4 text-base border-gray-800 p-1 font-semibold">
+                <p className="text-base md:text-xl font-semibold mt-2">{item.title}</p>
+                <p className="text-sm text-gray-600 mt-1">{item.description}</p>
+                <div className="flex gap-3 justify-center md:justify-start mt-3">
+                  <button className="flex items-center gap-2 border-2 rounded-md px-4 py-2 text-base border-gray-800 font-semibold hover:bg-gray-100 transition duration-300">
                     <IoIosCall className="text-lg md:text-2xl" />
                     Call
                   </button>
-                  <button className="flex items-center gap-2 border rounded-md px-4 text-base bg-gray-800 text-white p-1 font-semibold">
+                  <button className="flex items-center gap-2 border rounded-md px-4 py-2 text-base bg-gray-800 text-white font-semibold hover:bg-gray-700 transition duration-300">
                     <IoChatbubbleEllipsesOutline className="text-lg md:text-2xl" />
                     Chat
                   </button>

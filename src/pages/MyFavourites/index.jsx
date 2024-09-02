@@ -1,8 +1,8 @@
-import React, { useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { FaHeart } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { removeItem } from '../../redux/slices/favouritesItem';
+import { removeItem, savedItems } from '../../redux/slices/favouritesItem';
 import { getRandomDays } from '../../services/helper';
 import PageWrapper from '../../components/PageWrapper';
 import Categories from '../../components/Categories';
@@ -12,15 +12,21 @@ const MyFavourites = () => {
   const navigate = useNavigate();
   const cart = useSelector((state) => state.favourites.wishList);
 
+  useEffect(() => {
+    const storedData = localStorage.getItem('key');
+    if (storedData) {
+      dispatch(savedItems(JSON.parse(storedData)));
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    localStorage.setItem('key', JSON.stringify(cart));
+  }, [cart]);
 
   const handleRemoveItems = (e, item) => {
     e.stopPropagation();
     dispatch(removeItem(item));
   };
-
-  useEffect(()=>{
-    localStorage.setItem('key', JSON.stringify(cart))
-  },[cart])
 
   return (
     <>
@@ -35,7 +41,7 @@ const MyFavourites = () => {
               <div
                 key={index}
                 className="flex-none w-72 rounded border border-[#d8dfe0] bg-white cursor-pointer"
-                style={{ minWidth: "280px" }}
+                style={{ minWidth: '280px' }}
                 onClick={() => navigate(`/product/${item.id}`)}
               >
                 <img
