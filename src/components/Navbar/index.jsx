@@ -12,7 +12,7 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { IoChevronDown, IoDocumentTextOutline } from "react-icons/io5";
 import { MdLogout } from "react-icons/md";
 import { menuItems, menuMobileItems } from "../../categories";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { app } from "../../firebase/firebase";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { getFirestore, getDoc, doc } from "firebase/firestore";
@@ -42,6 +42,8 @@ export default function Navbar({ user }) {
   const [selectedItem, setSelectedItem] = useState("Location or Compound");
   const [location, setLocation] = useState("Use current location");
   const [loading, setLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('')
+  const navigate = useNavigate()
 
   const handleSelect = (item) => {
     setSelectedItem(item);
@@ -107,6 +109,10 @@ export default function Navbar({ user }) {
       }
     );
   };
+
+  const handleSearch = ()=>{
+    navigate(`/items/${searchQuery}`)
+  }
 
   // Usage
 
@@ -224,11 +230,15 @@ export default function Navbar({ user }) {
                 <div className="relative w-2/4">
                   <input
                     type="search"
+                    value={searchQuery}
                     placeholder="Find Cars, Mobile Phones and more..."
                     className="border border-[#d8dfe0] p-3 w-full h-12 rounded outline-none pr-12"
+                    onChange={(e)=> setSearchQuery(e.target.value)}
                     style={{ paddingRight: "3rem" }}
                   />
-                  <div className="absolute top-0 right-0 h-12 w-12 rounded-r bg-black flex items-center justify-center">
+                  <div className="absolute top-0 right-0 h-12 w-12 rounded-r bg-black flex items-center justify-center"
+                  onClick={handleSearch}
+                  >
                     <FaSearch className="h-6 w-6 text-white pointer-events-none" />
                   </div>
                 </div>

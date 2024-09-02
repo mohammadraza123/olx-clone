@@ -17,6 +17,7 @@ import ProtectedRoute from "./components/ProtectedRoutes";
 import Loader from "./components/Loader";
 import ScrollToTop from "react-scroll-to-top";
 import { ToastContainer } from "react-toastify";
+import SearchInput from "./components/SearchItems";
 
 function App() {
   const auth = getAuth(app);
@@ -52,6 +53,8 @@ function App() {
         <Route path="/signup" element={<SignupLayout />} />
         <Route path="/SigninEmail" element={<SigninForm />} />
         <Route path="/SignupEmail" element={<SignupForm />} />
+        <Route path="/items/:search" element={<SearchInput />} />
+
 
         {/* Protected Routes */}
         <Route element={<ProtectedRoute user={user} />}>
