@@ -111,7 +111,11 @@ export default function Navbar({ user }) {
   };
 
   const handleSearch = () => {
-    navigate(`/items/${searchQuery}`);
+    if (!searchQuery) {
+      return;
+    } else {
+      navigate(`/items/${searchQuery}`);
+    }
   };
 
   // Usage
@@ -196,7 +200,6 @@ export default function Navbar({ user }) {
                       />
                     </Menu.Button>
                   </div>
-
                   <Menu.Items className="absolute w-72 bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none rounded">
                     <Menu.Item>
                       <div
@@ -207,8 +210,6 @@ export default function Navbar({ user }) {
                           <HiOutlineLocationMarker fontSize={26} />
                           {location}
                           {/* Use Current Location */}
-
-                          
                         </div>
                       </div>
                     </Menu.Item>
@@ -234,7 +235,7 @@ export default function Navbar({ user }) {
                     type="search"
                     value={searchQuery}
                     placeholder="Find Cars, Mobile Phones and more..."
-                    className="border border-[#d8dfe0] p-3 w-full h-12 rounded outline-none pr-12"
+                    className="border border-[#d8dfe0] focus:border-[#23e5db] p-3 w-full h-12 rounded outline-none pr-12"
                     onChange={(e) => setSearchQuery(e.target.value)}
                     style={{ paddingRight: "3rem" }}
                   />
