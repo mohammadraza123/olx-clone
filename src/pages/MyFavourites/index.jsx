@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, {useMemo } from "react";
 import { FaHeart } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -15,10 +15,6 @@ const MyFavourites = () => {
     e.stopPropagation();
     dispatch(removeItem(item));
   };
-
-  useEffect(() => {
-    localStorage.setItem("key", JSON.stringify(cart));
-  }, [cart]);
 
   const getRandomDays = useMemo(() => {
     return cart.map(() => {

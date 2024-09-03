@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addItem, removeItem } from "../../redux/slices/favouritesItem";
 import { fetchApi } from "../../services/helper";
 
@@ -10,11 +10,20 @@ function ItemsCard(props) {
   const [favorites, setFavorites ] = useState({});
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+  const favoritesFromStore = useSelector((state) => state.favourites.wishList);
 
   useEffect(() => {
     fetchApi(props.apiCategory, setData);
   }, [props.apiCategory]);
+
+  useEffect(() => {
+    const initialFavorites = {};
+    favoritesFromStore.forEach(item => {
+      initialFavorites[item.id] = true;
+    });
+    setFavorites(initialFavorites);
+  }, [favoritesFromStore]);
+
 
   const getRandomDays = useMemo(() => {
     return data.map(() => {
