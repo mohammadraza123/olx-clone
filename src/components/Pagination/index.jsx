@@ -24,7 +24,7 @@ const handlePrev =()=>{
       <p className="font-semibold">
         {page} of {data.total}
       </p>
-      {page < data.total-1 ? (
+      {page < data.total ? (
         <button
           className="p-1 rounded-md px-2 bg-blue-800 text-sm text-white"
           onClick={handleNext}
