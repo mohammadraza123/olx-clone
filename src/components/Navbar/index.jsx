@@ -207,6 +207,7 @@ export default function Navbar({ user }) {
                           <HiOutlineLocationMarker fontSize={26} />
                           {location}
                           {/* Use Current Location */}
+
                           
                         </div>
                       </div>
