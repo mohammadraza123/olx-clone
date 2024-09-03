@@ -40,7 +40,7 @@ const MyFavourites = () => {
               <div
                 key={index}
                 className="flex-none w-72 rounded border border-[#d8dfe0] bg-white cursor-pointer"
-                style={{ minWidth: "280px" }}
+                style={{ minWidth: '280px' }}
                 onClick={() => navigate(`/product/${item.id}`)}
               >
                 <img

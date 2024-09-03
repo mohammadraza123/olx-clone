@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Pagination = ({page,setPage}) => {
+const Pagination = ({page,setPage,data}) => {
 
-const handleNext =()=>{
+  const handleNext =()=>{
 setPage(page+1)
 }
 
@@ -12,7 +12,7 @@ const handlePrev =()=>{
 
   return (
     <div className="flex justify-center gap-3 pt-5">
-      {page >=2 ?  (
+      {page >= 2 ? (
         <button
           className="p-1 rounded-md px-2 bg-blue-800 text-sm text-white"
           onClick={handlePrev}
@@ -21,13 +21,17 @@ const handlePrev =()=>{
         </button>
       ) : null}
 
-      <p className="font-semibold">{page} of 16</p>
-      <button
-        className="p-1 rounded-md px-2 bg-blue-800 text-sm text-white"
-        onClick={handleNext}
-      >
-        NEXT
-      </button>
+      <p className="font-semibold">
+        {page} of {data.total}
+      </p>
+      {page < data.total-1 ? (
+        <button
+          className="p-1 rounded-md px-2 bg-blue-800 text-sm text-white"
+          onClick={handleNext}
+        >
+          NEXT
+        </button>
+      ) : null}
     </div>
   );
 }

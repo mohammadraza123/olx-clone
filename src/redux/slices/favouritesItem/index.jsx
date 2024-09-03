@@ -16,15 +16,17 @@ export const favouritesSlice = createSlice({
       }
      
     },
-
     removeItem: (state, action) => {
       state.wishList = state.wishList.filter(
         (item) => item.id !== action.payload.id
       );
     },
+    savedItems: (state,action)=>{
+state.wishList = action.payload;
+    }
   },
 });
 
-export const { addItem, removeItem} = favouritesSlice.actions;
+export const { addItem, removeItem, savedItems } = favouritesSlice.actions;
 
 export default favouritesSlice.reducer
