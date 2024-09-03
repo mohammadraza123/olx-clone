@@ -16,6 +16,7 @@ const SearchInput = () => {
       .get(url)
       .then((res) => {
         console.log(res.data.products);
+
         setData(res.data.products);
       })
       .catch((err) => {
