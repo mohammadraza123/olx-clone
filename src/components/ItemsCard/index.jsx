@@ -7,7 +7,7 @@ import { fetchApi } from "../../services/helper";
 
 function ItemsCard(props) {
   const [data, setData] = useState([]);
-  const [favorites, setFavorites ] = useState({});
+  const [favorites, setFavorites] = useState({});
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const favoritesFromStore = useSelector((state) => state.favourites.wishList);
@@ -18,12 +18,11 @@ function ItemsCard(props) {
 
   useEffect(() => {
     const initialFavorites = {};
-    favoritesFromStore.forEach(item => {
+    favoritesFromStore.forEach((item) => {
       initialFavorites[item.id] = true;
     });
     setFavorites(initialFavorites);
   }, [favoritesFromStore]);
-
 
   const getRandomDays = useMemo(() => {
     return data.map(() => {

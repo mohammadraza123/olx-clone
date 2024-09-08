@@ -1,4 +1,4 @@
-import React, {useMemo } from "react";
+import React, { useMemo } from "react";
 import { FaHeart } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -27,7 +27,7 @@ const MyFavourites = () => {
     <>
       <PageWrapper>
         <Categories />
-        <div className="mx-auto w-full px-2 pt-3 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl w-full px-2 pt-3 sm:px-6 lg:px-8">
           <h1 className="font-bold pt-4 pb-4 text-2xl">
             Favourites & Saved searches
           </h1>
@@ -36,7 +36,7 @@ const MyFavourites = () => {
               <div
                 key={index}
                 className="flex-none w-72 rounded border border-[#d8dfe0] bg-white cursor-pointer"
-                style={{ minWidth: '280px' }}
+                style={{ minWidth: "280px" }}
                 onClick={() => navigate(`/product/${item.id}`)}
               >
                 <img

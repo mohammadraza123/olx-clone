@@ -23,9 +23,11 @@ const PageWrapper = ({ children }) => {
 
   return (
     <>
-      <Navbar user={user} />
-      <main>{children}</main>
-      <Footer />
+      <div className="flex flex-col min-h-screen">
+        <Navbar user={user} />
+        <main className="flex-grow">{children}</main>
+        <Footer />
+      </div>
     </>
   );
 };

@@ -1,6 +1,6 @@
 import React from "react";
-import footerBanner from "/assets/icons/footer-banner.webp";
 import { useNavigate } from "react-router-dom";
+import footerBanner from "/assets/icons/footer-banner.webp";
 
 const sections = [
   {
@@ -48,8 +48,10 @@ const Section = ({ title, links, navigate }) => (
       {links.map((link, index) => (
         <li key={index}>
           <a
-            onClick={() => navigate(`/category/${link.apicategory}`)}
-            className=" text-sm text-gray-400 hover:text-black cursor-pointer"
+            onClick={() =>
+              link.apicategory && navigate(`/category/${link.apicategory}`)
+            }
+            className="text-sm text-gray-400 hover:text-black cursor-pointer"
           >
             {link.name}
           </a>
@@ -62,41 +64,74 @@ const Section = ({ title, links, navigate }) => (
 function Footer() {
   const navigate = useNavigate();
   return (
-    <div className="relative min-h-screen">
-      {/* Your main content will go here */}
-      <div className=" sm:px-6 lg:px-8">
-        {/* Main content of the page */}
-      </div>
-
-      {/* Footer and Banner Section */}
-      <div className="absolute inset-x-0 bottom-0">
-        <div className="bg-[#f8faf9]">
-          <div className="flex items-center justify-center gap-3 mx-auto sm:px-6 lg:px-8">
-            <img src={footerBanner} className="object-contain" alt="Footer Banner" />
-            <div className="p-6 text-center md:text-start">
-              <h1 className="text-4xl font-medium">TRY THE OLX APP</h1>
-              <h3 className="text-xl">
-                Buy, sell and find just about anything using the app on your mobile.
-              </h3>
-            </div>
+    // <>
+    //    <div className="bg-[#f8faf9] mt-20">
+    //       <div className="flex items-center justify-center gap-3 mx-auto sm:px-6 lg:px-8">
+    //         <img src={footerBanner} className="object-contain" alt="Footer Banner" />
+    //         <div className="p-6 text-center md:text-start">
+    //           <h1 className="text-4xl font-medium">TRY THE OLX APP</h1>
+    //           <h3 className="text-xl">
+    //             Buy, sell and find just about anything using the app on your mobile.
+    //           </h3>
+    //         </div>
+    //       </div>
+    //       </div>
+    // <footer className="bg-[#ebeeef] border-t py-8 w-full">
+    //   <div className="container mx-auto max-w-7xl px-4 lg:px-8">
+    //     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+    //       {sections.map((section, index) => (
+    //         <Section
+    //           key={index}
+    //           title={section.title}
+    //           links={section.links}
+    //           navigate={navigate}
+    //         />
+    //       ))}
+    //     </div>
+    //   </div>
+    //   <div className="text-center mt-8 text-gray-500 text-sm">
+    //     © 2024 OLX, All rights reserved.
+    //   </div>
+    // </footer>
+    // </>
+    <>
+      <div className="bg-[#f8faf9] py-8 px-4 md:px-6 lg:px-8 mt-20">
+        <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-6 mx-auto max-w-7xl">
+          <img
+            src={footerBanner}
+            className="object-contain w-full max-w-xs md:max-w-md"
+            alt="Footer Banner"
+          />
+          <div className="text-center md:text-left">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-medium mb-2">
+              TRY THE OLX APP
+            </h1>
+            <h3 className="text-lg sm:text-xl md:text-2xl">
+              Buy, sell and find just about anything using the app on your
+              mobile.
+            </h3>
           </div>
         </div>
-        <footer className="bg-[#ebeeef] border-t text-red py-10">
-          <div className="container mx-auto max-w-7xl px-2 pt-3 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              {sections.map((section, index) => (
-                <Section
-                  key={index}
-                  title={section.title}
-                  links={section.links}
-                  navigate={navigate}
-                />
-              ))}
-            </div>
-          </div>
-        </footer>
       </div>
-    </div>
+
+      <footer className="bg-[#ebeeef] border-t py-8 w-full">
+        <div className="container mx-auto max-w-7xl px-4 lg:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {sections.map((section, index) => (
+              <Section
+                key={index}
+                title={section.title}
+                links={section.links}
+                navigate={navigate}
+              />
+            ))}
+          </div>
+        </div>
+        <div className="text-center mt-8 text-gray-500 text-sm">
+          © 2024 OLX, All rights reserved.
+        </div>
+      </footer>
+    </>
   );
 }
 
