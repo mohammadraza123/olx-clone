@@ -4,7 +4,11 @@ import UserForm from "../../components/UserForm";
 const SigninForm = () => {
   return (
     <>
-      <UserForm heading="Sign In" showFields={false} signupLogic={false} />
+      <UserForm
+        heading="Login in with Email"
+        showFields={false}
+        signupLogic={false}
+      />
     </>
   );
 };

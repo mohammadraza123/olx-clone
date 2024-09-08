@@ -29,7 +29,12 @@ const navigation = [
   { name: "Help", to: "/team", icon: IoMdHelpCircleOutline, current: false },
 ];
 
-const locationMenu = ["Account settings", "Support", "License", "Sign out"];
+const locationMenu = [
+  "Sindh, Pakistan",
+  "Punjab, Pakistan",
+  "Balouchistan, Pakistan",
+  "Azad Kashmir, Pakistan",
+];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -221,7 +226,6 @@ export default function Navbar({ user }) {
                         >
                           <div className="flex gap-2 items-center">
                             <HiOutlineLocationMarker size={26} />
-
                             {item}
                           </div>
                         </div>

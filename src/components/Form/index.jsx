@@ -4,7 +4,7 @@ import { IoClose } from "react-icons/io5";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { app } from "../../firebase/firebase";
 import { FcGoogle } from "react-icons/fc";
-import { MdEmail } from "react-icons/md";
+import { MdOutlineEmail } from "react-icons/md";
 import { toast } from "react-toastify";
 
 const Form = ({
@@ -33,22 +33,25 @@ const Form = ({
   return (
     <>
       <div className="flex justify-center items-center min-h-screen">
-        <div className="max-w-sm w-full md:rounded-lg md:shadow-lg bg-white p-6 md:border ">
-          <div className="flex justify-end pb-2">
+        <div className="max-w-sm w-full md:rounded-lg md:shadow-lg bg-white p-6 md:border h-[500px] flex flex-col justify-center relative">
+          <div className="absolute top-4 right-4">
             <Link className="text-3xl" to="/">
               <IoClose />
             </Link>
           </div>
-          <div className="text-center pb-4">
+          <div className="text-center">
             <h1 className="text-4xl font-extrabold mb-8 text-[#002F34]">Olx</h1>
-            <p className="text-[#002F34] font-semibold text-2xl">{heading}</p>
+            <p className="text-[#002F34] font-semibold pb-8 text-2xl">
+              {heading}
+            </p>
           </div>
           <div className="space-y-4">
-            <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium border hover:border-2 border-black text-[#002F34] text-lg h-10 px-4 py-5 w-full">
-              <div className="flex justify-center items-center ">
-                <FcGoogle className="mx-2 text-2xl" />
-                <button onClick={joinWithGoogle}>{title}</button>
-              </div>
+            <button
+              className="inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium border-2 border-black text-[#002F34] text-lg h-10 px-4 py-5 w-full"
+              onClick={joinWithGoogle}
+            >
+              <FcGoogle className="mx-2 text-2xl" />
+              {title}
             </button>
 
             <div className="flex items-center space-x-2">
@@ -60,24 +63,21 @@ const Form = ({
             </div>
             <Link
               to={routeEmail}
-              className="inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium border hover:border-2 border-black text-[#002F34] text-lg h-10 px-4 py-5 w-full"
+              className="inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium border-2 border-black text-[#002F34] text-lg h-10 px-4 py-5 w-full"
             >
-              <div className="flex items-center justify-center">
-                <MdEmail className="mx-2 text-2xl" />
-                {title1}
-              </div>
+              <MdOutlineEmail className="mx-2 text-2xl" />
+              {title1}
             </Link>
-
-            <div className=" py-2">
+            <div className="py-2">
               {showFields && (
                 <p className="text-sm text-center pb-6">
                   When creating a new account you agree to{" "}
                   <b>
-                    <u> OLX's Terms and conditions </u>
+                    <u>OLX's Terms and conditions</u>
                   </b>{" "}
                   and{" "}
                   <b>
-                    <u> Privacy Policy</u>{" "}
+                    <u>Privacy Policy</u>
                   </b>
                 </p>
               )}
