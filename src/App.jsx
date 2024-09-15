@@ -55,7 +55,6 @@ function App() {
         <Route path="/SignupEmail" element={<SignupForm />} />
         <Route path="/items/:search" element={<SearchInput />} />
 
-
         {/* Protected Routes */}
         <Route element={<ProtectedRoute user={user} />}>
           <Route path="/myFavourites" element={<MyFavourites />} />

@@ -1,51 +1,40 @@
-import { createSlice } from '@reduxjs/toolkit';
-
-const loadFromLocalStorage = () => {
-  try {
-    const storedData = localStorage.getItem('wishList');
-    if (storedData === null) {
-      return [];
-    }
-    return JSON.parse(storedData);
-  } catch (error) {
-    console.error('Could not load from localStorage', error);
-    return [];
-  }
-};
+import { createSlice } from "@reduxjs/toolkit";
 
 const saveToLocalStorage = (state) => {
   try {
     const storedData = JSON.stringify(state.wishList);
-    localStorage.setItem('wishList', storedData);
+    console.log(storedData);
   } catch (error) {
-    console.error('error: ', error);
+    console.error("error: ", error);
   }
 };
 
 const initialState = {
-  wishList: loadFromLocalStorage(), 
+  wishList: [],
 };
 
 export const favouritesSlice = createSlice({
-  name: 'favourites',
+  name: "favourites",
   initialState,
   reducers: {
     addItem: (state, action) => {
-      const exists = state.wishList.some((item) => item.id === action.payload.id);
+      const exists = state.wishList.some(
+        (item) => item.id === action.payload.id
+      );
       if (!exists) {
         state.wishList.push(action.payload);
-        saveToLocalStorage(state); 
+        saveToLocalStorage(state);
       }
     },
     removeItem: (state, action) => {
       state.wishList = state.wishList.filter(
         (item) => item.id !== action.payload.id
       );
-      saveToLocalStorage(state); 
+      saveToLocalStorage(state);
     },
     savedItems: (state, action) => {
       state.wishList = action.payload;
-      saveToLocalStorage(state); 
+      saveToLocalStorage(state);
     },
   },
 });
